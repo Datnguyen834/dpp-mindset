@@ -305,10 +305,12 @@
                             </svg>
                         </div>
 
-                        <!-- Matte Black Mindset Thermos Bottle SVG -->
-                        <svg class="w-[108px] h-[196px] sm:w-[132px] sm:h-[240px] relative z-20 bottle-render drop-shadow-[0_12px_18px_rgba(0,0,0,0.65)]" viewBox="0 0 220 470">
+                        <!-- Matte Black Mindset Thermos Bottle SVG / Custom Uploaded Image -->
+                        <svg id="hero-default-illustration" class="w-[108px] h-[196px] sm:w-[132px] sm:h-[240px] relative z-20 bottle-render drop-shadow-[0_12px_18px_rgba(0,0,0,0.65)]" viewBox="0 0 220 470">
                             <use href="#mindset-thermos-bottle" />
                         </svg>
+                        <img id="hero-dpp-product-image" alt="Ảnh sản phẩm Mindset"
+                            class="hidden absolute bottom-0 z-25 w-[110px] h-[190px] sm:w-[135px] sm:h-[230px] object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.65)]" />
                     </div>
                 </div>
             </div>
@@ -1208,13 +1210,25 @@
 
                 const productImage = document.getElementById('dpp-product-image');
                 const defaultIllustration = document.getElementById('default-product-illustration');
-                if (productImage && product.image_data) {
-                    productImage.src = product.image_data;
-                    productImage.classList.remove('hidden');
+                const heroImage = document.getElementById('hero-dpp-product-image');
+                const heroDefault = document.getElementById('hero-default-illustration');
+
+                if (product.image_data) {
+                    if (productImage) {
+                        productImage.src = product.image_data;
+                        productImage.classList.remove('hidden');
+                    }
                     if (defaultIllustration) defaultIllustration.classList.add('hidden');
-                } else if (productImage) {
-                    productImage.classList.add('hidden');
+                    if (heroImage) {
+                        heroImage.src = product.image_data;
+                        heroImage.classList.remove('hidden');
+                    }
+                    if (heroDefault) heroDefault.classList.add('hidden');
+                } else {
+                    if (productImage) productImage.classList.add('hidden');
                     if (defaultIllustration) defaultIllustration.classList.remove('hidden');
+                    if (heroImage) heroImage.classList.add('hidden');
+                    if (heroDefault) heroDefault.classList.remove('hidden');
                 }
 
                 // Cập nhật thông tin sản phẩm trên giao diện DPP công khai
