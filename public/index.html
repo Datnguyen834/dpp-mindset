@@ -381,8 +381,11 @@
                         <div>
                             <!-- Header Row -->
                             <div class="flex items-center justify-between gap-2 mb-1.5 sm:mb-2">
-                                <span class="text-xs sm:text-sm font-bold text-[#1E2D1F]" data-i18n="prod_info_label">Thông tin sản phẩm</span>
-                                <button onclick="openModal('product')" class="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#ECEEE4] hover:bg-[#dfe3d4] text-[#1E2D1F] text-[10.5px] sm:text-xs font-semibold flex items-center space-x-1 transition border border-black/5">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="text-xs sm:text-sm font-bold text-[#1E2D1F]" data-i18n="prod_info_label">Thông tin sản phẩm</span>
+                                    <span id="dpp-category-badge" class="hidden px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] sm:text-[11px] font-bold"></span>
+                                </div>
+                                <button onclick="openModal('product')" class="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-[#ECEEE4] hover:bg-[#dfe3d4] text-[#1E2D1F] text-[10.5px] sm:text-xs font-semibold flex items-center space-x-1 transition border border-black/5 shrink-0">
                                     <span data-i18n="btn_product_detail">Chi tiết sản phẩm</span>
                                     <i data-lucide="arrow-right" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
                                 </button>
@@ -400,8 +403,8 @@
                         <!-- Divider -->
                         <div class="h-[1px] bg-slate-200/90 my-2.5 sm:my-4"></div>
 
-                        <!-- 3-Column Specs Grid -->
-                        <div class="grid grid-cols-3 divide-x divide-slate-200/90 text-center items-start pt-0.5">
+                        <!-- Dynamic Specs Grid (Tự động co giãn theo số lượng danh mục thông số của từng sản phẩm) -->
+                        <div id="dpp-specs-grid" class="grid grid-cols-3 divide-x divide-slate-200/90 text-center items-start pt-0.5">
                             <!-- Spec 1: Dung tích -->
                             <div class="px-1 sm:px-3 flex flex-col items-center">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#2B5329] mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -476,7 +479,7 @@
                             <span class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#2E622E] text-white flex items-center justify-center">
                                 <i data-lucide="shield-check" class="w-2.5 h-2.5 sm:w-3 sm:h-3"></i>
                             </span>
-                            <span class="text-xs sm:text-sm font-bold text-[#1D281E]">Inox 304</span>
+                            <span id="dpp-material-badge" class="text-xs sm:text-sm font-bold text-[#1D281E]">Inox 304</span>
                         </div>
                     </div>
                 </div>
@@ -931,58 +934,94 @@
             const p = window._currentDppProduct || {};
 
             if (type === 'product') {
-                title.textContent = `Thông tin chi tiết — ${p.name || 'Bình giữ nhiệt Mindset'}`;
+                title.textContent = `Thông tin chi tiết — ${p.name || 'Sản phẩm Mindset'}`;
+                const specs = getDynamicSpecs(p);
+                const specRowsHtml = specs.map(s => `
+                    <div class="flex justify-between py-1.5 border-b border-slate-100 gap-4">
+                        <span class="text-slate-500">${escapeHtml(s.label)}</span>
+                        <span class="font-bold text-slate-900 text-right">${escapeHtml(s.value)}</span>
+                    </div>
+                `).join('');
+
                 body.innerHTML = `
-                    <div class="p-4 bg-white rounded-2xl border border-slate-200 space-y-2.5">
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                    <div class="p-4 bg-white rounded-2xl border border-slate-200 space-y-2">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100 gap-4">
                             <span class="text-slate-500">Tên sản phẩm</span>
-                            <span class="font-bold text-slate-900">${p.name || 'Bình giữ nhiệt Mindset Signature'}</span>
+                            <span class="font-bold text-slate-900 text-right">${escapeHtml(p.name || 'Bình giữ nhiệt Mindset')}</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        ${p.category ? `
+                        <div class="flex justify-between py-1.5 border-b border-slate-100 gap-4">
+                            <span class="text-slate-500">Danh mục / Ngành hàng</span>
+                            <span class="font-bold text-emerald-800 text-right">${escapeHtml(p.category)}</span>
+                        </div>` : ''}
+                        ${specRowsHtml}
+                        ${p.batch_code ? `
+                        <div class="flex justify-between py-1.5 border-b border-slate-100 gap-4">
                             <span class="text-slate-500">Mã lô sản xuất (Batch)</span>
-                            <span class="font-mono font-bold text-emerald-700">${p.batch_code || '#MS-2026-VN08'}</span>
-                        </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="font-mono font-bold text-emerald-700 text-right">${escapeHtml(p.batch_code)}</span>
+                        </div>` : ''}
+                        ${p.release_date ? `
+                        <div class="flex justify-between py-1.5 border-b border-slate-100 gap-4">
                             <span class="text-slate-500">Ngày xuất xưởng</span>
-                            <span class="font-semibold text-slate-800">${p.release_date || '15/02/2026'}</span>
-                        </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
-                            <span class="text-slate-500">Cấu trúc cách nhiệt</span>
-                            <span class="font-semibold text-slate-800">2 lớp Inox 304 + Chân không mạ đồng</span>
-                        </div>
-                        <div class="flex justify-between py-1">
-                            <span class="text-slate-500">Bảo hành điện tử</span>
-                            <span class="font-bold text-emerald-700">24 tháng chính hãng</span>
-                        </div>
+                            <span class="font-semibold text-slate-800 text-right">${escapeHtml(p.release_date)}</span>
+                        </div>` : ''}
+                        ${p.co2_emission ? `
+                        <div class="flex justify-between py-1.5 gap-4">
+                            <span class="text-slate-500">Phát thải CO₂ vòng đời</span>
+                            <span class="font-bold text-emerald-700 text-right">${escapeHtml(p.co2_emission)}</span>
+                        </div>` : ''}
                     </div>
                 `;
             } else if (type === 'material') {
-                title.textContent = 'Hồ sơ vật liệu & Độ tinh khiết (Inox 304)';
-                body.innerHTML = `
-                    <div class="space-y-3">
-                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-slate-900">Thép không gỉ Austenitic SUS304</span>
-                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">82% Khối lượng</span>
-                            </div>
-                            <p class="text-slate-600 text-xs">Chứa 18% Crom và 8% Niken, chống oxy hóa tuyệt đối, không chứa BPA và không thôi nhiễm kim loại nặng.</p>
+                title.textContent = `Hồ sơ vật liệu — ${p.name || 'Sản phẩm Mindset'}`;
+                const isDefaultThermos = !p.id || p.id === 'MS-THERMO-500';
+                if (!isDefaultThermos && p.material_desc) {
+                    const specs = getDynamicSpecs(p);
+                    const specPills = specs.map(s => `
+                        <div class="p-3 bg-[#F8FAF5] rounded-xl border border-slate-200 flex justify-between items-center">
+                            <span class="text-xs text-slate-500 font-medium">${escapeHtml(s.label)}</span>
+                            <span class="text-xs font-bold text-slate-900">${escapeHtml(s.value)}</span>
                         </div>
-                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-slate-900">Nắp nhựa PP nguyên sinh & Gioăng Silicon y tế</span>
-                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">14% Khối lượng</span>
+                    `).join('');
+                    body.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="p-4 bg-white rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1.5">
+                                    <span class="font-bold text-slate-900">Thành phần & Vật liệu cấu tạo</span>
+                                    <span class="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">Đã kiểm định</span>
+                                </div>
+                                <p class="text-slate-600 text-xs leading-relaxed">${escapeHtml(p.material_desc)}</p>
                             </div>
-                            <p class="text-slate-600 text-xs">Chịu nhiệt lên tới 120°C, tháo rời dễ dàng để vệ sinh và tái chế riêng biệt.</p>
+                            ${specPills ? `<div class="grid grid-cols-1 gap-2">${specPills}</div>` : ''}
                         </div>
-                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="font-bold text-slate-900">Sơn tĩnh điện Powder Coating không dung môi</span>
-                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">4% Khối lượng</span>
+                    `;
+                } else {
+                    body.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-slate-900">Thép không gỉ Austenitic SUS304</span>
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">82% Khối lượng</span>
+                                </div>
+                                <p class="text-slate-600 text-xs">Chứa 18% Crom và 8% Niken, chống oxy hóa tuyệt đối, không chứa BPA và không thôi nhiễm kim loại nặng.</p>
                             </div>
-                            <p class="text-slate-600 text-xs">Bề mặt nhám Matte Black chống bám vân tay, không phát thải VOC trong quá trình phủ.</p>
+                            <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-slate-900">Nắp nhựa PP nguyên sinh & Gioăng Silicon y tế</span>
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">14% Khối lượng</span>
+                                </div>
+                                <p class="text-slate-600 text-xs">Chịu nhiệt lên tới 120°C, tháo rời dễ dàng để vệ sinh và tái chế riêng biệt.</p>
+                            </div>
+                            <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-slate-900">Sơn tĩnh điện Powder Coating không dung môi</span>
+                                    <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">4% Khối lượng</span>
+                                </div>
+                                <p class="text-slate-600 text-xs">Bề mặt nhám Matte Black chống bám vân tay, không phát thải VOC trong quá trình phủ.</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
             } else if (type === 'cert') {
                 title.textContent = 'Chứng nhận chất lượng & An toàn quốc tế';
                 body.innerHTML = `
@@ -1141,6 +1180,77 @@
             }, 2600);
         }
 
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function getDynamicSpecs(product) {
+            if (!product) return [];
+            if (Array.isArray(product.specs) && product.specs.length > 0) {
+                return product.specs.filter(s => s && (s.label || s.value));
+            }
+            const fallback = [];
+            if (product.capacity) fallback.push({ label: 'Dung tích', value: product.capacity });
+            if (product.temperature) fallback.push({ label: 'Giữ nhiệt', value: product.temperature });
+            if (product.weight) fallback.push({ label: 'Trọng lượng', value: product.weight });
+            return fallback;
+        }
+
+        function getSpecIcon(label) {
+            const l = String(label || '').toLowerCase();
+            if (l.includes('dung tích') || l.includes('thể tích') || l.includes('ml') || l.includes('lít')) return 'cup-soda';
+            if (l.includes('nhiệt') || l.includes('độ')) return 'thermometer';
+            if (l.includes('trọng lượng') || l.includes('khối lượng') || l.includes('cân nặng')) return 'shopping-bag';
+            if (l.includes('kích thước') || l.includes('size') || l.includes('chiều')) return 'maximize-2';
+            if (l.includes('chất liệu') || l.includes('vật liệu') || l.includes('thành phần')) return 'layers';
+            if (l.includes('xuất xứ') || l.includes('nguồn gốc') || l.includes('nơi')) return 'map-pin';
+            if (l.includes('bảo hành')) return 'shield-check';
+            if (l.includes('hạn') || l.includes('ngày') || l.includes('thời gian')) return 'calendar';
+            if (l.includes('năng lượng') || l.includes('công suất') || l.includes('calo') || l.includes('pin')) return 'zap';
+            if (l.includes('màu')) return 'palette';
+            return 'check-circle-2';
+        }
+
+        function renderProductSpecs(specs) {
+            const gridEl = document.getElementById('dpp-specs-grid');
+            if (!gridEl) return;
+            if (!specs || specs.length === 0) {
+                gridEl.innerHTML = `<div class="col-span-3 text-center text-xs text-slate-400 py-2">Đang cập nhật thông số sản phẩm</div>`;
+                return;
+            }
+            const count = specs.length;
+            if (count === 1) {
+                gridEl.className = "grid grid-cols-1 text-center items-start pt-0.5";
+            } else if (count === 2) {
+                gridEl.className = "grid grid-cols-2 divide-x divide-slate-200/90 text-center items-start pt-0.5";
+            } else if (count === 3) {
+                gridEl.className = "grid grid-cols-3 divide-x divide-slate-200/90 text-center items-start pt-0.5";
+            } else if (count === 4) {
+                gridEl.className = "grid grid-cols-2 sm:grid-cols-4 gap-y-3 sm:gap-y-0 sm:divide-x divide-slate-200/90 text-center items-start pt-0.5";
+            } else {
+                gridEl.className = "grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center items-stretch pt-0.5";
+            }
+
+            gridEl.innerHTML = specs.map(s => {
+                const iconName = getSpecIcon(s.label);
+                const formattedVal = escapeHtml(s.value || '—').replace(' / ', '<br>/ ');
+                const cardStyle = count >= 5 ? 'bg-white/80 rounded-xl p-2 border border-slate-200/70' : 'px-1 sm:px-3';
+                return `
+                    <div class="${cardStyle} flex flex-col items-center justify-center">
+                        <i data-lucide="${iconName}" class="w-4 h-4 sm:w-5 sm:h-5 text-[#2B5329] mb-1"></i>
+                        <span class="text-[10px] sm:text-xs text-[#5A675B]">${escapeHtml(s.label)}</span>
+                        <strong class="text-[11px] sm:text-sm md:text-base font-bold text-[#142015] leading-tight mt-0.5">${formattedVal}</strong>
+                    </div>
+                `;
+            }).join('');
+
+            if (window.lucide) lucide.createIcons();
+        }
+
         // --- ĐỒNG BỘ DỮ LIỆU ĐỘNG TỪ BACKEND DATABASE THEO MÃ SẢN PHẨM TRÊN URL (/dpp/:id) ---
         async function fetchProductFromBackend() {
             try {
@@ -1196,14 +1306,33 @@
                     i18nDict.VN.mat_desc = product.material_desc;
                 }
 
-                // Cập nhật 3 thông số kỹ thuật (Dung tích, Giữ nhiệt, Trọng lượng)
-                const specCapEl = document.querySelector('[data-i18n="spec_cap"]')?.nextElementSibling;
-                const specTempEl = document.querySelector('[data-i18n="spec_temp"]')?.nextElementSibling;
-                const specWeightEl = document.querySelector('[data-i18n="spec_weight"]')?.nextElementSibling;
+                // Hiển thị nhãn ngành hàng / loại sản phẩm (nếu có)
+                const catBadge = document.getElementById('dpp-category-badge');
+                if (catBadge) {
+                    if (product.category) {
+                        catBadge.textContent = product.category;
+                        catBadge.classList.remove('hidden');
+                    } else {
+                        catBadge.classList.add('hidden');
+                    }
+                }
 
-                if (specCapEl && product.capacity) specCapEl.textContent = product.capacity;
-                if (specTempEl && product.temperature) specTempEl.innerHTML = product.temperature.replace('/', '<br>/');
-                if (specWeightEl && product.weight) specWeightEl.textContent = product.weight;
+                // Hiển thị danh sách danh mục thông số động
+                const specs = getDynamicSpecs(product);
+                renderProductSpecs(specs);
+
+                // Cập nhật nhãn vật liệu góc phải thẻ Hồ sơ vật liệu
+                const matBadge = document.getElementById('dpp-material-badge');
+                if (matBadge) {
+                    const matSpec = specs.find(s => /chất liệu|vật liệu|thành phần|material/i.test(s.label));
+                    if (matSpec && matSpec.value) {
+                        matBadge.textContent = matSpec.value;
+                    } else if (product.material_desc && !/inox 304|thép không gỉ 304/i.test(product.material_desc)) {
+                        matBadge.textContent = product.category || 'Chuẩn Xanh';
+                    } else {
+                        matBadge.textContent = 'Inox 304';
+                    }
+                }
 
                 // Cập nhật thông số CO2
                 const co2Box = document.getElementById('co2-value-display');

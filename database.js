@@ -25,27 +25,51 @@ async function init() {
         CREATE TABLE IF NOT EXISTS products (
             id TEXT PRIMARY KEY,
             name TEXT NOT NULL,
+            category TEXT DEFAULT '',
             tagline TEXT DEFAULT '',
-            capacity TEXT DEFAULT '500ml',
-            temperature TEXT DEFAULT '12h nóng / 24h lạnh',
-            weight TEXT DEFAULT '320g',
+            capacity TEXT DEFAULT '',
+            temperature TEXT DEFAULT '',
+            weight TEXT DEFAULT '',
+            specs JSONB DEFAULT '[]'::jsonb,
             material_desc TEXT DEFAULT '',
-            co2_emission TEXT DEFAULT '1.24 kg',
-            batch_code TEXT DEFAULT '#MS-2026-VN08',
-            release_date TEXT DEFAULT '15/02/2026',
+            co2_emission TEXT DEFAULT '',
+            batch_code TEXT DEFAULT '',
+            release_date TEXT DEFAULT '',
             updated_at TIMESTAMPTZ DEFAULT NOW(),
             image_data TEXT
         );
         ALTER TABLE products ADD COLUMN IF NOT EXISTS image_data TEXT;
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS category TEXT DEFAULT '';
+        ALTER TABLE products ADD COLUMN IF NOT EXISTS specs JSONB DEFAULT '[]'::jsonb;
     `);
+
+    // Đồng bộ dữ liệu cũ (nếu có sản phẩm cũ chưa có mảng specs động)
+    const existing = await pool.query('SELECT id, capacity, temperature, weight, specs FROM products');
+    for (const row of existing.rows) {
+        const hasSpecs = Array.isArray(row.specs) && row.specs.length > 0;
+        if (!hasSpecs) {
+            const migratedSpecs = [];
+            if (row.capacity) migratedSpecs.push({ label: 'Dung tích', value: row.capacity });
+            if (row.temperature) migratedSpecs.push({ label: 'Giữ nhiệt', value: row.temperature });
+            if (row.weight) migratedSpecs.push({ label: 'Trọng lượng', value: row.weight });
+            if (migratedSpecs.length > 0) {
+                await pool.query('UPDATE products SET specs = $1::jsonb WHERE id = $2', [JSON.stringify(migratedSpecs), row.id]);
+            }
+        }
+    }
 
     const count = await pool.query('SELECT COUNT(*)::int AS count FROM products');
     if (count.rows[0].count === 0) {
+        const defaultSpecs = [
+            { label: 'Dung tích', value: '500ml' },
+            { label: 'Giữ nhiệt', value: '12h nóng / 24h lạnh' },
+            { label: 'Trọng lượng', value: '320g' }
+        ];
         await pool.query(`INSERT INTO products
-            (id,name,tagline,capacity,temperature,weight,material_desc,co2_emission,batch_code,release_date)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
-            ['MS-THERMO-500','Bình giữ nhiệt Mindset','Đồng hành cùng bạn trong mọi hành trình',
-             '500ml','12h nóng / 24h lạnh','320g',
+            (id,name,category,tagline,capacity,temperature,weight,specs,material_desc,co2_emission,batch_code,release_date)
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12)`,
+            ['MS-THERMO-500','Bình giữ nhiệt Mindset','Bình giữ nhiệt','Đồng hành cùng bạn trong mọi hành trình',
+             '500ml','12h nóng / 24h lạnh','320g', JSON.stringify(defaultSpecs),
              'Sản phẩm được làm từ thép không gỉ 304 cao cấp, an toàn cho sức khỏe và thân thiện với môi trường.',
              '1.24 kg','#MS-2026-VN08','15/02/2026']);
     }

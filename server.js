@@ -27,6 +27,37 @@ function verifyAdminToken(req, res, next) {
     });
 }
 
+function normalizeSpecs(rawSpecs, fallbackObj = {}) {
+    let arr = [];
+    if (Array.isArray(rawSpecs)) {
+        arr = rawSpecs;
+    } else if (typeof rawSpecs === 'string' && rawSpecs.trim()) {
+        try { arr = JSON.parse(rawSpecs); } catch (e) { arr = []; }
+    }
+    const cleaned = (Array.isArray(arr) ? arr : [])
+        .map(item => ({
+            label: String(item?.label || '').trim(),
+            value: String(item?.value || '').trim()
+        }))
+        .filter(item => item.label !== '' || item.value !== '');
+
+    if (cleaned.length === 0) {
+        if (fallbackObj.capacity) cleaned.push({ label: 'Dung tích', value: String(fallbackObj.capacity).trim() });
+        if (fallbackObj.temperature) cleaned.push({ label: 'Giữ nhiệt', value: String(fallbackObj.temperature).trim() });
+        if (fallbackObj.weight) cleaned.push({ label: 'Trọng lượng', value: String(fallbackObj.weight).trim() });
+    }
+    return cleaned;
+}
+
+function formatProductRow(row) {
+    if (!row) return null;
+    return {
+        ...row,
+        category: row.category || '',
+        specs: normalizeSpecs(row.specs, row)
+    };
+}
+
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -57,7 +88,7 @@ app.get('/api/public/products/:id', async (req, res) => {
     try {
         const result = await db.query('SELECT * FROM products WHERE id = $1', [req.params.id]);
         if (!result.rows[0]) return res.status(404).json({ error: 'Không tìm thấy Hộ chiếu số cho mã sản phẩm này.' });
-        res.json(result.rows[0]);
+        res.json(formatProductRow(result.rows[0]));
     } catch (err) {
         console.error('Public product error:', err);
         res.status(500).json({ error: 'Không thể tải dữ liệu sản phẩm.' });
@@ -67,20 +98,36 @@ app.get('/api/public/products/:id', async (req, res) => {
 app.get('/api/admin/products', verifyAdminToken, async (req, res) => {
     try {
         const result = await db.query('SELECT * FROM products ORDER BY updated_at DESC');
-        res.json(result.rows);
+        res.json(result.rows.map(formatProductRow));
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Không thể tải danh sách sản phẩm.' });
     }
 });
 
-const productFields = ['name','tagline','capacity','temperature','weight','material_desc','co2_emission','batch_code','release_date','image_data'];
+const productFields = [
+    'name', 'category', 'tagline', 'capacity', 'temperature', 'weight',
+    'specs', 'material_desc', 'co2_emission', 'batch_code', 'release_date', 'image_data'
+];
+
 function productValues(body) {
+    const specs = normalizeSpecs(body.specs, body);
+    const cap = specs[0]?.value || body.capacity?.trim() || '';
+    const temp = specs[1]?.value || body.temperature?.trim() || '';
+    const weight = specs[2]?.value || body.weight?.trim() || '';
+
     return [
-        body.name?.trim(), body.tagline || '', body.capacity || '500ml',
-        body.temperature || '12h nóng / 24h lạnh', body.weight || '320g',
-        body.material_desc || '', body.co2_emission || '1.24 kg',
-        body.batch_code || '#MS-2026-VN08', body.release_date || '15/02/2026',
+        body.name?.trim(),
+        body.category?.trim() || '',
+        body.tagline?.trim() || '',
+        cap,
+        temp,
+        weight,
+        JSON.stringify(specs),
+        body.material_desc?.trim() || '',
+        body.co2_emission?.trim() || '',
+        body.batch_code?.trim() || '',
+        body.release_date?.trim() || '',
         body.image_data || null
     ];
 }
@@ -91,7 +138,7 @@ app.post('/api/admin/products', verifyAdminToken, async (req, res) => {
         if (!id || !req.body.name) return res.status(400).json({ error: 'Mã sản phẩm (ID) và Tên sản phẩm là bắt buộc!' });
         const vals = [id.trim(), ...productValues(req.body)];
         await db.query(`INSERT INTO products (id, ${productFields.join(', ')}, updated_at)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,NOW())`, vals);
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,NOW())`, vals);
         res.json({ message: 'Đã thêm sản phẩm DPP mới thành công!', id });
     } catch (err) {
         console.error('Create product error:', err);
@@ -103,9 +150,9 @@ app.put('/api/admin/products/:id', verifyAdminToken, async (req, res) => {
     try {
         const vals = [...productValues(req.body), req.params.id];
         const result = await db.query(`UPDATE products SET
-            name=$1, tagline=$2, capacity=$3, temperature=$4, weight=$5,
-            material_desc=$6, co2_emission=$7, batch_code=$8, release_date=$9,
-            image_data=$10, updated_at=NOW() WHERE id=$11`, vals);
+            name=$1, category=$2, tagline=$3, capacity=$4, temperature=$5, weight=$6,
+            specs=$7::jsonb, material_desc=$8, co2_emission=$9, batch_code=$10, release_date=$11,
+            image_data=$12, updated_at=NOW() WHERE id=$13`, vals);
         if (!result.rowCount) return res.status(404).json({ error: 'Không tìm thấy sản phẩm cần sửa!' });
         res.json({ message: 'Cập nhật Hộ chiếu số thành công!' });
     } catch (err) {
