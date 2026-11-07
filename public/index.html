@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dpp.mindset.vn — Hộ chiếu số Bình giữ nhiệt Mindset</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Be Vietnam Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+                    },
+                    colors: {
+                        mindset: {
+                            gold: '#F5B800',
+                            lime: '#8DE062',
+                            forest: '#234B24',
+                            dark: '#142316',
+                            cream: '#F2F3EC',
+                            card: '#FAFBF7'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #243b27 0%, #0d170f 100%);
+            color: #1A241B;
+            overflow-x: hidden;
+        }
+
+        /* Custom Subtle Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e9ece2;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a895;
+            border-radius: 9999px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Hero Forest Bokeh Background */
+        .hero-forest-bg {
+            background:
+                radial-gradient(circle at 75% 18%, rgba(182, 230, 118, 0.38) 0%, rgba(76, 128, 52, 0.12) 38%, transparent 65%),
+                radial-gradient(circle at 55% 40%, rgba(255, 250, 190, 0.22) 0%, transparent 40%),
+                radial-gradient(circle at 20% 25%, rgba(45, 85, 42, 0.65) 0%, transparent 55%),
+                linear-gradient(160deg, #162816 0%, #244220 45%, #162c16 80%, #0f1f10 100%);
+        }
+
+        /* Brushed Stainless Steel 304 Wave Texture */
+        .inox-wave-bg {
+            background:
+                radial-gradient(ellipse at 88% 25%, rgba(255,255,255,0.65) 0%, transparent 45%),
+                linear-gradient(125deg, #f7f8f4 0%, #f5f6f1 42%, #d8dcd7 56%, #7d827e 69%, #cfd3cf 80%, #5c615d 92%, #2f3330 100%);
+        }
+
+        /* Lifecycle Dark Forest Banner */
+        .lifecycle-forest-bg {
+            background:
+                radial-gradient(circle at 65% 20%, rgba(138, 209, 94, 0.28) 0%, transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(65, 130, 55, 0.35) 0%, transparent 50%),
+                linear-gradient(105deg, #132814 0%, #1f411e 48%, #2e5928 78%, #1b3819 100%);
+        }
+
+        /* Soft Card Shadow matching mockup */
+        .dpp-card {
+            background-color: #F9FAF6;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px -2px rgba(20, 38, 22, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+        }
+
+        /* Bottle Float Animation */
+        @keyframes subtleFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        .bottle-render {
+            animation: subtleFloat 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start py-0 sm:py-6 selection:bg-emerald-700 selection:text-white">
+
+    <!-- Reusable SVG Definitions (New Mindset Logo & Thermos Bottle Graphic) -->
+    <svg width="0" height="0" class="hidden" aria-hidden="true">
+        <defs>
+            <!-- NEW MINDSET M-BRAIN ICON SYMBOL (Exact match to logo.png) -->
+            <symbol id="mindset-logo-mark" viewBox="0 0 120 110">
+                <!-- Outer Black Contour of M + Head Profile -->
+                <path d="M12 92 L12 12 L56 46 L102 10 L102 42 C106 48 106 55 103 60 L110 72 C111 75 109 78 105 79 L106 84 C106 89 102 92 95 92 L86 91 L84 105 L66 93 L66 78 L56 68 L34 50 L34 68 Z"
+                      fill="#FFFFFF" stroke="#000000" stroke-width="6.5" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- Inner M White Structure -->
+                <path d="M16 86 L16 18 L56 50 L98 17 L98 35" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+                <!-- Right Silhouette Head Profile (Black Fill) -->
+                <path d="M60 48 C60 30 76 22 92 27 C101 30 104 38 102 46 C102 51 108 61 108 64 C108 67 104 68 103 70 C104 73 104 75 101 77 C102 82 99 86 92 86 C87 86 83 84 81 84 L81 100 L69 91 L69 70 C62 66 59 58 60 48 Z"
+                      fill="#080808" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- White Neck / Stem Inside Head Silhouette -->
+                <path d="M68 72 L68 91 L82 100 L82 63 C82 57 76 56 73 60 Z" fill="#FFFFFF" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Golden Yellow Brain Outline Inside Cranium -->
+                <path d="M69 52 C66 49 67 42 72 40 C73 35 81 33 86 36 C92 36 96 41 95 47 C97 51 94 56 89 56 C86 56 84 53 82 50 C79 54 75 58 70 56 C67 55 67 51 71 49"
+                      fill="none" stroke="#F5B800" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Golden Yellow Diagonal Pill on Bottom-Left Leg of M -->
+                <path d="M13 88 L37 62 C41 58 47 61 47 67 L47 80 C47 83 45 86 43 88 L22 106 C17 109 12 106 12 100 Z"
+                      fill="#F5B800" stroke="#000000" stroke-width="5.5" stroke-linejoin="round"/>
+            </symbol>
+
+            <!-- FULL MINDSET STACKED PRINT (For Bottle Body) -->
+            <symbol id="mindset-bottle-print" viewBox="0 0 160 155">
+                <use href="#mindset-logo-mark" x="20" y="2" width="120" height="105" />
+                <!-- Wordmark "Mindset" with Golden i-dot -->
+                <g transform="translate(8, 134)">
+                    <text x="72" y="0" text-anchor="middle" fill="#FFFFFF" stroke="#000000" stroke-width="3.5" paint-order="stroke" font-family="'Be Vietnam Pro', sans-serif" font-weight="800" font-size="31" letter-spacing="-0.5">Mindset</text>
+                    <!-- Golden dot on the 'i' -->
+                    <polygon points="40,-22 50,-22 46,-15 38,-15" fill="#F5B800" stroke="#000000" stroke-width="1.5"/>
+                </g>
+            </symbol>
+
+            <!-- REALISTIC MATTE BLACK MINDSET THERMOS BOTTLE -->
+            <linearGradient id="thermosBodyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#0c0e0d" />
+                <stop offset="18%" stop-color="#272b29" />
+                <stop offset="34%" stop-color="#484d4a" />
+                <stop offset="48%" stop-color="#1d201e" />
+                <stop offset="78%" stop-color="#101211" />
+                <stop offset="93%" stop-color="#262927" />
+                <stop offset="100%" stop-color="#090a0a" />
+            </linearGradient>
+            <linearGradient id="thermosLidGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#0a0b0b" />
+                <stop offset="22%" stop-color="#323634" />
+                <stop offset="40%" stop-color="#555a57" />
+                <stop offset="65%" stop-color="#181a19" />
+                <stop offset="100%" stop-color="#0b0c0c" />
+            </linearGradient>
+            <linearGradient id="steelRingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#1a1c1b" />
+                <stop offset="35%" stop-color="#6e7370" />
+                <stop offset="50%" stop-color="#2a2d2b" />
+                <stop offset="100%" stop-color="#0f1110" />
+            </linearGradient>
+
+            <symbol id="mindset-thermos-bottle" viewBox="0 0 220 470">
+                <!-- Drop Shadow Under Bottle -->
+                <ellipse cx="110" cy="452" rx="68" ry="12" fill="rgba(0,0,0,0.55)" />
+                <!-- Main Cylindrical Body -->
+                <path d="M46 112 C46 98 54 90 60 84 L160 84 C166 90 174 98 174 112 L172 430 C172 444 156 452 110 452 C64 452 48 444 48 430 Z"
+                      fill="url(#thermosBodyGrad)" />
+                <!-- Subtle Vertical Rim Highlight Left -->
+                <path d="M64 95 L64 438" stroke="rgba(255,255,255,0.13)" stroke-width="6" stroke-linecap="round" filter="blur(2px)"/>
+                <!-- Subtle Rim Reflection Right -->
+                <path d="M161 100 L159 435" stroke="rgba(255,255,255,0.06)" stroke-width="3" stroke-linecap="round"/>
+                <!-- Bottom Base Curve Shading -->
+                <path d="M48 424 Q110 436 172 424 L171 433 C171 445 152 452 110 452 C68 452 49 445 49 433 Z" fill="rgba(0,0,0,0.45)"/>
+
+                <!-- Neck Seam Groove -->
+                <ellipse cx="110" cy="84" rx="52" ry="4" fill="#090a0a" />
+                <rect x="57" y="77" width="106" height="7" rx="2" fill="url(#steelRingGrad)" />
+
+                <!-- Upper Lid Dome & Flip Cap -->
+                <path d="M56 78 L58 34 C58 22 76 14 110 14 C144 14 162 22 162 34 L164 78 Z"
+                      fill="url(#thermosLidGrad)" />
+                <!-- Lid Top Specular Bevel -->
+                <ellipse cx="110" cy="21" rx="46" ry="7" fill="#2c302e" stroke="#474c49" stroke-width="1"/>
+                <!-- Lid Horizontal Separation Band -->
+                <path d="M56 54 Q110 60 164 54" fill="none" stroke="#0b0c0c" stroke-width="3.5"/>
+                <path d="M56 56 Q110 62 164 56" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+
+                <!-- Flip-Lock Clasp Mechanism (Top Center-Left as in Mockup) -->
+                <rect x="83" y="25" width="34" height="44" rx="7" fill="#171918" stroke="#080909" stroke-width="2.5"/>
+                <rect x="87" y="28" width="26" height="36" rx="5" fill="#272b29" stroke="#3e4340" stroke-width="1"/>
+                <!-- Clasp Button / Latch -->
+                <rect x="92" y="34" width="16" height="10" rx="3" fill="#121413" stroke="#484e4b" stroke-width="1"/>
+                <circle cx="100" cy="54" r="3.5" fill="#121413" stroke="#525855" stroke-width="1"/>
+
+                <!-- Printed New Mindset Logo on Bottle Center -->
+                <use href="#mindset-bottle-print" x="62" y="166" width="96" height="94" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Floating Top Controls (Desktop Preview Frame Switcher) -->
+    <div class="w-full max-w-[500px] px-3 mb-2.5 hidden sm:flex items-center justify-between text-xs text-emerald-100/80">
+        <div class="flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-mindset-lime animate-pulse"></span>
+            <span class="font-medium tracking-wide">Hộ chiếu số sản phẩm • dpp.mindset.vn</span>
+        </div>
+        <div class="flex items-center space-x-1.5 bg-black/40 p-1 rounded-full border border-white/10">
+            <button onclick="setFrameMode('mobile')" id="btn-frame-mobile" class="px-3 py-1 rounded-full bg-emerald-700 text-white font-medium transition text-[11px]">
+                Khung iPhone
+            </button>
+            <button onclick="setFrameMode('web')" id="btn-frame-web" class="px-3 py-1 rounded-full text-emerald-200/70 hover:text-white font-medium transition text-[11px]">
+                Web Đầy Đủ
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN DEVICE / APP CONTAINER -->
+    <div id="app-shell" class="w-full max-w-[500px] bg-[#ECEEE6] sm:rounded-[44px] shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden flex flex-col relative sm:border-[8px] sm:border-[#1c261e] transition-all duration-300">
+
+        <!-- iOS Top Status Bar + Safari URL Bar (Matches Mockup) -->
+        <div id="ios-chrome" class="bg-[#182719] text-white select-none">
+            <!-- Status Row -->
+            <div class="px-6 pt-2.5 pb-1.5 flex items-center justify-between text-[13px] font-semibold tracking-tight">
+                <div class="flex items-center space-x-1.5">
+                    <!-- Signal bars -->
+                    <div class="flex items-end space-x-0.5 h-3">
+                        <span class="w-0.5 h-1.5 bg-white rounded-full"></span>
+                        <span class="w-0.5 h-2 bg-white rounded-full"></span>
+                        <span class="w-0.5 h-2.5 bg-white rounded-full"></span>
+                        <span class="w-0.5 h-3 bg-white/40 rounded-full"></span>
+                    </div>
+                    <span class="text-[11px] font-medium">VPN</span>
+                    <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                </div>
+                <span class="font-bold text-[14px]">9:41</span>
+                <div class="flex items-center space-x-1.5">
+                    <span class="text-[12px] font-semibold">100%</span>
+                    <div class="w-6 h-3 border border-white/80 rounded-[4px] p-0.5 flex items-center relative">
+                        <div class="w-full h-full bg-[#75E84F] rounded-[1.5px]"></div>
+                        <span class="w-0.5 h-1.5 bg-white/80 rounded-r-sm absolute -right-1"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safari Address Bar: dpp.mindset.vn -->
+            <div class="px-3 pb-2.5 pt-0.5">
+                <div class="bg-[#384639]/90 backdrop-blur-md rounded-xl py-2 px-3.5 flex items-center justify-between border border-white/10 shadow-inner">
+                    <div class="w-5"></div>
+                    <div class="flex items-center space-x-1.5 text-[13px] font-medium text-white/95">
+                        <i data-lucide="lock" class="w-3.5 h-3.5 text-white/75"></i>
+                        <span>dpp.mindset.vn</span>
+                    </div>
+                    <button onclick="reloadPassport()" title="Làm mới dữ liệu" class="text-white/80 hover:text-white transition">
+                        <i data-lucide="rotate-cw" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- A. HERO SECTION                            -->
+        <!-- ========================================== -->
+        <section class="relative hero-forest-bg text-white pt-3 pb-9 px-4 overflow-hidden">
+            <!-- Decorative Bokeh Light Orbs -->
+            <div class="absolute top-3 left-1/2 w-28 h-28 bg-lime-300/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute top-12 right-12 w-36 h-36 bg-yellow-200/15 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-6 left-10 w-40 h-32 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
+
+            <!-- Top Navigation Bar inside Hero -->
+            <header class="relative z-20 flex items-center justify-between mb-5">
+                <div class="flex items-center space-x-2.5">
+                    <!-- Circular Translucent Back Button -->
+                    <button onclick="showToast('Quay lại trang chủ Mindset')" class="w-8 h-8 rounded-full bg-black/25 hover:bg-black/40 border border-white/15 backdrop-blur-md flex items-center justify-center transition">
+                        <i data-lucide="chevron-left" class="w-4 h-4 text-white"></i>
+                    </button>
+
+                    <!-- New Mindset Logo + Wordmark -->
+                    <a href="#tong-quan" class="flex items-center space-x-1.5 group">
+                        <svg class="w-9 h-8 drop-shadow" viewBox="0 0 120 110">
+                            <use href="#mindset-logo-mark" />
+                        </svg>
+                        <div class="relative flex items-center">
+                            <span class="font-extrabold text-[19px] tracking-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">Mindset</span>
+                            <!-- Golden accent on 'i' -->
+                            <span class="w-1.5 h-1 bg-[#F5B800] rounded-xs absolute left-[17.5px] top-[3px] transform -skew-x-12"></span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Right Controls: Language & Share -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleLanguage()" class="px-2.5 py-1 rounded-full bg-black/25 hover:bg-black/40 border border-white/20 backdrop-blur-md text-xs font-semibold text-white flex items-center space-x-1 transition">
+                        <i data-lucide="globe" class="w-3.5 h-3.5 text-white/90"></i>
+                        <span id="lang-label">VN</span>
+                        <i data-lucide="chevron-down" class="w-3 h-3 text-white/80"></i>
+                    </button>
+                    <button onclick="openModal('qr')" title="Chia sẻ & Mã QR Hộ chiếu số" class="w-8 h-8 rounded-full bg-black/25 hover:bg-black/40 border border-white/25 backdrop-blur-md flex items-center justify-center transition">
+                        <i data-lucide="share-2" class="w-3.5 h-3.5 text-white"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Hero Grid: Left Copy + Right Bottle on Mossy Rock -->
+            <div class="relative z-10 grid grid-cols-12 items-center pt-1">
+                <!-- Left Column (Cols 1-7) -->
+                <div class="col-span-7 space-y-3 pr-1 z-20">
+                    <!-- Badge: Digital Product Passport -->
+                    <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#244322]/80 border border-[#629652]/50 backdrop-blur-md shadow-sm">
+                        <svg class="w-3.5 h-3.5 text-[#9AE66E]" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8Z"/>
+                        </svg>
+                        <span class="text-[11px] font-medium text-white/95 tracking-tight">Digital Product Passport</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="text-[22px] sm:text-[24px] font-extrabold leading-[1.22] tracking-tight text-white drop-shadow-sm">
+                        <span data-i18n="hero_title_1">Minh bạch hôm nay,</span><br>
+                        <span data-i18n="hero_title_2">Bền vững </span><span class="text-[#8CE563]" data-i18n="hero_title_3">ngày mai</span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-[11.5px] text-white/85 leading-relaxed max-w-[235px] font-normal" data-i18n="hero_desc">
+                        Khám phá toàn bộ hành trình và giá trị bền vững của sản phẩm Mindset.
+                    </p>
+
+                    <!-- Powered by Mindset Line -->
+                    <div class="pt-1 flex items-center space-x-2 text-[10px] text-white/60 font-medium">
+                        <span class="w-6 h-[1px] bg-white/35"></span>
+                        <span>Powered by Mindset</span>
+                        <span class="w-6 h-[1px] bg-white/35"></span>
+                    </div>
+                </div>
+
+                <!-- Right Column (Cols 8-12): Bottle + Botanical Leaves + Mossy Rock -->
+                <div class="col-span-5 relative flex justify-center items-end min-h-[215px]">
+                    <!-- Decorative White Line-Art Leaf Outlines Behind Bottle -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none overflow-visible" viewBox="0 0 200 220">
+                        <!-- White outline leaf right -->
+                        <path d="M115 155 C135 90 175 45 190 35 C190 85 165 140 120 165 Z" fill="rgba(160, 215, 110, 0.15)" stroke="rgba(255,255,255,0.65)" stroke-width="1.2"/>
+                        <path d="M120 160 Q155 100 185 40" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+                        <!-- White outline leaf left -->
+                        <path d="M60 170 C10 140 -5 105 -10 85 C25 85 55 115 68 165 Z" fill="rgba(120, 185, 85, 0.18)" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+                        <!-- Solid Lush Green Leaves Behind Bottle -->
+                        <path d="M95 165 C120 110 165 80 185 82 C175 125 145 158 100 170 Z" fill="#467c30" opacity="0.9"/>
+                        <path d="M98 165 Q140 122 178 86" fill="none" stroke="#85bf60" stroke-width="1.2"/>
+                        <path d="M72 168 C45 135 20 125 5 132 C22 158 45 170 72 172 Z" fill="#3a6b26" opacity="0.9"/>
+                    </svg>
+
+                    <!-- Mossy Rock Base under Bottle -->
+                    <div class="absolute -bottom-6 -left-10 -right-6 h-16 pointer-events-none z-10">
+                        <svg viewBox="0 0 260 70" class="w-full h-full">
+                            <!-- Stone base -->
+                            <path d="M15 65 C30 32 75 26 135 28 C185 30 230 38 255 65 Z" fill="#3b372b"/>
+                            <path d="M35 65 C55 40 95 34 145 36 C185 38 215 46 235 65 Z" fill="#595343"/>
+                            <!-- Lush Green Moss Clumps on Right & Left -->
+                            <path d="M155 42 C170 28 195 25 215 32 C230 28 248 35 255 52 L255 68 L140 68 C142 54 148 46 155 42 Z" fill="#4a7c29"/>
+                            <path d="M168 46 C182 35 205 34 222 42 C235 38 245 45 250 58 L155 62 Z" fill="#6fa83d"/>
+                            <path d="M20 56 C35 45 55 46 70 55 L15 64 Z" fill="#4e7d2c"/>
+                        </svg>
+                    </div>
+
+                    <!-- Matte Black Mindset Thermos Bottle SVG -->
+                    <svg class="w-[108px] h-[196px] relative z-20 bottle-render drop-shadow-[0_12px_18px_rgba(0,0,0,0.65)]" viewBox="0 0 220 470">
+                        <use href="#mindset-thermos-bottle" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- B. STICKY NAVIGATION TABS BAR              -->
+        <!-- ========================================== -->
+        <nav class="sticky top-0 z-30 -mt-4 px-2.5">
+            <div class="bg-[#F5F6F0] rounded-[20px] p-1.5 shadow-md border border-white flex items-center justify-between">
+                <!-- Tab 1: Tổng quan -->
+                <button onclick="selectTab('tong-quan')" id="nav-tong-quan" class="flex-1 py-2 px-2 rounded-[14px] bg-[#254D26] text-white flex flex-col items-center justify-center space-y-0.5 transition relative shadow-sm">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span class="text-[10.5px] font-semibold leading-tight" data-i18n="tab_overview">Tổng quan</span>
+                </button>
+
+                <span class="h-6 w-[1px] bg-slate-200/90"></span>
+
+                <!-- Tab 2: Vật liệu -->
+                <button onclick="selectTab('vat-lieu')" id="nav-vat-lieu" class="flex-1 py-2 px-2 rounded-[14px] text-[#2B3B2C] hover:bg-emerald-900/5 flex flex-col items-center justify-center space-y-0.5 transition">
+                    <i data-lucide="leaf" class="w-4 h-4 text-[#2F5A2F]"></i>
+                    <span class="text-[10.5px] font-medium leading-tight" data-i18n="tab_material">Vật liệu</span>
+                </button>
+
+                <span class="h-6 w-[1px] bg-slate-200/90"></span>
+
+                <!-- Tab 3: Tác động MT -->
+                <button onclick="selectTab('tac-dong')" id="nav-tac-dong" class="flex-1 py-2 px-2 rounded-[14px] text-[#2B3B2C] hover:bg-emerald-900/5 flex flex-col items-center justify-center space-y-0.5 transition">
+                    <i data-lucide="sprout" class="w-4 h-4 text-[#2F5A2F]"></i>
+                    <span class="text-[10.5px] font-medium leading-tight" data-i18n="tab_impact">Tác động MT</span>
+                </button>
+
+                <span class="h-6 w-[1px] bg-slate-200/90"></span>
+
+                <!-- Tab 4: Vòng đời -->
+                <button onclick="selectTab('vong-doi')" id="nav-vong-doi" class="flex-1 py-2 px-2 rounded-[14px] text-[#2B3B2C] hover:bg-emerald-900/5 flex flex-col items-center justify-center space-y-0.5 transition">
+                    <i data-lucide="recycle" class="w-4 h-4 text-[#2F5A2F]"></i>
+                    <span class="text-[10.5px] font-medium leading-tight" data-i18n="tab_lifecycle">Vòng đời</span>
+                </button>
+
+                <span class="h-6 w-[1px] bg-slate-200/90"></span>
+
+                <!-- Tab 5: Khác -->
+                <button onclick="selectTab('khac')" id="nav-khac" class="flex-1 py-2 px-2 rounded-[14px] text-[#2B3B2C] hover:bg-emerald-900/5 flex flex-col items-center justify-center space-y-0.5 transition">
+                    <i data-lucide="more-horizontal" class="w-4 h-4 text-[#2F5A2F]"></i>
+                    <span class="text-[10.5px] font-medium leading-tight" data-i18n="tab_more">Khác</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ========================================== -->
+        <!-- MAIN BODY CARDS                            -->
+        <!-- ========================================== -->
+        <main class="px-3 pt-3 pb-4 space-y-3">
+
+            <!-- C. CARD 1: THÔNG TIN SẢN PHẨM (PRODUCT INFO) -->
+            <section id="sec-tong-quan" class="dpp-card p-3 transition-all duration-300">
+                <div class="grid grid-cols-12 gap-3 items-stretch">
+                    <!-- Left Studio Image Thumbnail with Bottle & Leaves (Cols 1-5) -->
+                    <div class="col-span-5 relative rounded-[15px] bg-gradient-to-b from-[#DFE4D8] via-[#E5E9DF] to-[#D5DDD0] overflow-hidden flex items-end justify-center min-h-[168px] border border-black/5 shadow-inner">
+                        <!-- Top-left Verified Pill Badge -->
+                        <div class="absolute top-2 left-2 z-20 bg-white/95 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm flex items-center space-x-1 border border-emerald-900/10">
+                            <span class="w-3.5 h-3.5 rounded-full bg-[#3A7D34] text-white flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-2.5 h-2.5 stroke-[3]"></i>
+                            </span>
+                            <span class="text-[8.5px] leading-[1.1] font-semibold text-[#1E2E1F]">
+                                Đã xác thực<br>bởi Mindset
+                            </span>
+                        </div>
+
+                        <!-- Decorative Studio Tropical Green Leaves Behind Bottle -->
+                        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 180 180">
+                            <!-- Left fan leaves -->
+                            <path d="M82 155 C45 130 18 98 10 62 C42 70 68 98 85 145 Z" fill="#4F7937"/>
+                            <path d="M80 150 Q45 105 15 66" stroke="#84AD68" stroke-width="1" fill="none"/>
+                            <path d="M78 158 C38 152 12 135 2 115 C32 114 58 128 78 154 Z" fill="#638E48"/>
+                            <!-- Right fan leaves -->
+                            <path d="M98 152 C125 115 152 88 172 72 C164 110 138 138 102 156 Z" fill="#58843E"/>
+                            <path d="M100 152 Q135 112 168 76" stroke="#8BB370" stroke-width="1" fill="none"/>
+                            <path d="M102 158 C132 146 158 136 174 128 C156 150 130 160 102 160 Z" fill="#3F662B"/>
+                            <!-- Soft studio table surface -->
+                            <rect x="0" y="154" width="180" height="26" fill="#E6E9E1" opacity="0.85"/>
+                        </svg>
+
+                        <!-- Matte Black Mindset Bottle with New Logo -->
+                        <svg class="w-[74px] h-[146px] relative z-10 mb-1 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)]" viewBox="0 0 220 470">
+                            <use href="#mindset-thermos-bottle" />
+                        </svg>
+                    </div>
+
+                    <!-- Right Product Info & Specs (Cols 6-12) -->
+                    <div class="col-span-7 flex flex-col justify-between py-0.5">
+                        <div>
+                            <!-- Header Row -->
+                            <div class="flex items-center justify-between gap-1 mb-1">
+                                <span class="text-[11px] font-bold text-[#1E2D1F]" data-i18n="prod_info_label">Thông tin sản phẩm</span>
+                                <button onclick="openModal('product')" class="px-2.5 py-1 rounded-full bg-[#ECEEE4] hover:bg-[#dfe3d4] text-[#1E2D1F] text-[10px] font-semibold flex items-center space-x-1 transition border border-black/5">
+                                    <span data-i18n="btn_product_detail">Chi tiết sản phẩm</span>
+                                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                </button>
+                            </div>
+
+                            <!-- Product Title & Subtitle -->
+                            <h2 class="text-[16px] font-extrabold text-[#142015] tracking-tight leading-snug" data-i18n="prod_name">
+                                Bình giữ nhiệt Mindset
+                            </h2>
+                            <p class="text-[10.5px] text-[#4A584B] mt-0.5 leading-snug" data-i18n="prod_tagline">
+                                Đồng hành cùng bạn trong mọi hành trình
+                            </p>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="h-[1px] bg-slate-200/90 my-2"></div>
+
+                        <!-- 3-Column Specs Grid -->
+                        <div class="grid grid-cols-3 divide-x divide-slate-200/90 text-center items-start pt-0.5">
+                            <!-- Spec 1: Dung tích -->
+                            <div class="px-1 flex flex-col items-center">
+                                <svg class="w-4 h-4 text-[#2B5329] mb-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                    <path d="M5 4h14l-1.5 15a2 2 0 0 1-2 1.8H8.5a2 2 0 0 1-2-1.8L5 4Z"/>
+                                    <path d="M4 4h16"/>
+                                </svg>
+                                <span class="text-[9.5px] text-[#5A675B]" data-i18n="spec_cap">Dung tích</span>
+                                <strong class="text-[11.5px] font-bold text-[#142015] mt-0.5">500ml</strong>
+                            </div>
+
+                            <!-- Spec 2: Giữ nhiệt -->
+                            <div class="px-1 flex flex-col items-center">
+                                <i data-lucide="thermometer" class="w-4 h-4 text-[#2B5329] mb-1"></i>
+                                <span class="text-[9.5px] text-[#5A675B]" data-i18n="spec_temp">Giữ nhiệt</span>
+                                <strong class="text-[10.5px] font-bold text-[#142015] leading-tight mt-0.5">12h nóng<br>/ 24h lạnh</strong>
+                            </div>
+
+                            <!-- Spec 3: Trọng lượng -->
+                            <div class="px-1 flex flex-col items-center">
+                                <i data-lucide="shopping-bag" class="w-4 h-4 text-[#2B5329] mb-1"></i>
+                                <span class="text-[9.5px] text-[#5A675B]" data-i18n="spec_weight">Trọng lượng</span>
+                                <strong class="text-[11.5px] font-bold text-[#142015] mt-0.5">320g</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- D. CARD 2: HỒ SƠ VẬT LIỆU (MATERIAL PROFILE) -->
+            <section id="sec-vat-lieu" onclick="openModal('material')" class="dpp-card inox-wave-bg p-4 relative overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-md">
+                <!-- Realistic Metallic Sheen Overlay on Right Side -->
+                <svg class="absolute right-0 top-0 h-full w-[52%] pointer-events-none opacity-85" viewBox="0 0 220 120" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="steelWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#f7f8f4" stop-opacity="0"/>
+                            <stop offset="35%" stop-color="#d4d7d4" stop-opacity="0.7"/>
+                            <stop offset="65%" stop-color="#5a5e5b" stop-opacity="0.9"/>
+                            <stop offset="85%" stop-color="#e5e7e5" stop-opacity="0.95"/>
+                            <stop offset="100%" stop-color="#2c302d" stop-opacity="1"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M35 0 C85 35 45 85 15 120 L220 120 L220 0 Z" fill="url(#steelWave1)"/>
+                    <path d="M95 0 C135 40 90 85 65 120" stroke="rgba(255,255,255,0.55)" stroke-width="12" fill="none" filter="blur(4px)"/>
+                    <path d="M145 0 C175 35 140 85 115 120" stroke="rgba(30,35,32,0.55)" stroke-width="10" fill="none" filter="blur(3px)"/>
+                </svg>
+
+                <div class="relative z-10 flex items-start justify-between">
+                    <div class="max-w-[72%] space-y-1.5">
+                        <div class="flex items-center space-x-2">
+                            <!-- Double Green Leaf Icon -->
+                            <div class="w-7 h-7 rounded-lg bg-[#E3EDE0] flex items-center justify-center text-[#2D6A2E]">
+                                <i data-lucide="leaf" class="w-4 h-4 fill-[#2D6A2E]/20"></i>
+                            </div>
+                            <h3 class="text-[15px] font-extrabold text-[#162317]" data-i18n="mat_title">Hồ sơ vật liệu</h3>
+                        </div>
+
+                        <p class="text-[11px] text-[#2E3B2F] leading-relaxed pl-9" data-i18n="mat_desc">
+                            Sản phẩm được làm từ thép không gỉ 304 cao cấp, an toàn cho sức khỏe và thân thiện với môi trường.
+                        </p>
+
+                        <div class="pt-0.5 pl-1">
+                            <span class="inline-flex items-center space-x-1 text-[10.5px] font-semibold text-[#1E3A1F] group-hover:translate-x-0.5 transition">
+                                <span data-i18n="btn_see_detail">Xem chi tiết</span>
+                                <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom-right Inox 304 Pill Badge -->
+                    <div class="self-end mt-12">
+                        <div class="bg-[#E5E7E2]/95 backdrop-blur-md px-3 py-1 rounded-full shadow-sm border border-white/60 flex items-center space-x-1.5">
+                            <span class="w-4 h-4 rounded-full bg-[#2E622E] text-white flex items-center justify-center">
+                                <i data-lucide="shield-check" class="w-2.5 h-2.5"></i>
+                            </span>
+                            <span class="text-[10.5px] font-bold text-[#1D281E]">Inox 304</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- E. TWO-COLUMN GRID: CHỨNG NHẬN & TÁC ĐỘNG MÔI TRƯỜNG -->
+            <section id="sec-tac-dong" class="grid grid-cols-12 gap-3">
+                <!-- Left Card: Chứng nhận (Cols 1-6) -->
+                <div onclick="openModal('cert')" class="col-span-6 dpp-card p-3.5 flex flex-col justify-between cursor-pointer hover:shadow-md transition">
+                    <div>
+                        <div class="flex items-start space-x-2">
+                            <div class="w-6 h-6 rounded-full bg-[#2F682F] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-[13.5px] font-extrabold text-[#162317] leading-tight" data-i18n="cert_title">Chứng nhận</h3>
+                                <p class="text-[10px] text-[#4A584B] mt-1 leading-snug" data-i18n="cert_desc">
+                                    Đạt các tiêu chuẩn chất lượng và an toàn quốc tế.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: ISO, RoHS, SGS + Xem thêm -->
+                    <div class="mt-3 pt-2 border-t border-slate-200/70 flex items-center justify-between gap-1">
+                        <div class="flex items-center space-x-1.5">
+                            <!-- ISO Badge -->
+                            <div class="w-10 h-8 rounded-lg bg-[#F1F3EC] border border-slate-200/80 flex flex-col items-center justify-center">
+                                <span class="text-[10px] font-black text-[#1A569E] tracking-tighter leading-none">ISO</span>
+                                <span class="text-[6px] text-[#1A569E] font-semibold">9001</span>
+                            </div>
+                            <!-- RoHS Badge -->
+                            <div class="w-10 h-8 rounded-lg bg-[#F1F3EC] border border-slate-200/80 flex flex-col items-center justify-center">
+                                <i data-lucide="check" class="w-3 h-3 text-[#2E7D32] stroke-[3] -mb-0.5"></i>
+                                <span class="text-[8.5px] font-extrabold text-[#235D26] leading-none">RoHS</span>
+                            </div>
+                            <!-- SGS Badge -->
+                            <div class="w-10 h-8 rounded-lg bg-[#F1F3EC] border border-slate-200/80 flex items-center justify-center">
+                                <span class="text-[10px] font-black text-[#374151] tracking-tight border-b-2 border-amber-500 leading-none pb-0.5">SGS</span>
+                            </div>
+                        </div>
+
+                        <span class="text-[9.5px] font-semibold text-[#1E3A1F] whitespace-nowrap flex items-center">
+                            <span>Xem thêm</span>
+                            <i data-lucide="arrow-right" class="w-2.5 h-2.5 ml-0.5"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Card: Tác động môi trường (Cols 7-12) -->
+                <div onclick="openModal('impact')" class="col-span-6 dpp-card p-3.5 relative overflow-hidden flex flex-col justify-between cursor-pointer hover:shadow-md transition">
+                    <!-- Decorative Earth & Green Leaves in Bottom-Right -->
+                    <svg class="absolute -right-2 -bottom-2 w-24 h-24 pointer-events-none" viewBox="0 0 100 100">
+                        <!-- Green Leaves -->
+                        <path d="M62 65 C65 40 82 22 95 18 C95 40 82 58 65 68 Z" fill="#3F7033"/>
+                        <path d="M75 72 C82 52 92 42 100 40 C98 58 88 70 75 75 Z" fill="#63964C"/>
+                        <!-- Earth Globe Arc -->
+                        <circle cx="72" cy="88" r="28" fill="#8AB676"/>
+                        <path d="M52 78 C60 72 72 75 78 82 C84 89 75 96 65 95 Z" fill="#467639"/>
+                        <path d="M75 64 C82 68 90 74 92 84" stroke="#E4EFE0" stroke-width="2" fill="none"/>
+                    </svg>
+
+                    <div class="relative z-10">
+                        <div class="flex items-start space-x-2">
+                            <div class="w-6 h-6 rounded-full bg-[#E3EDE0] text-[#285E29] flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-[13.5px] font-extrabold text-[#162317] leading-tight" data-i18n="imp_title">Tác động môi trường</h3>
+                                <p class="text-[10px] text-[#4A584B] mt-0.5 leading-snug">
+                                    Giảm phát thải CO₂<br>
+                                    <strong class="text-[#2E7D32] font-bold">≈ 32%</strong> so với sản phẩm truyền thống.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CO2 Pill Box -->
+                    <div class="relative z-10 mt-2.5 bg-[#DCE7D6]/90 rounded-xl p-2 pr-3 inline-flex items-center space-x-2 max-w-[82%] border border-[#bdd1b3]/60">
+                        <div class="bg-[#346B34] text-white px-2 py-1 rounded-lg flex items-center justify-center text-[9px] font-extrabold tracking-tight shadow-xs">
+                            CO₂
+                        </div>
+                        <div class="leading-none">
+                            <span class="text-[14px] font-extrabold text-[#142015] block">1.24 kg</span>
+                            <span class="text-[8.5px] font-semibold text-[#3B4D3C]">CO₂e</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- F. CARD 4: HÀNH TRÌNH VÒNG ĐỜI SẢN PHẨM (LIFECYCLE JOURNEY) -->
+            <section id="sec-vong-doi" class="lifecycle-forest-bg rounded-[20px] p-4 text-white relative overflow-hidden shadow-md border border-emerald-900/30">
+                <!-- Background Sunbeams Effect -->
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(167,232,118,0.16),transparent_60%)] pointer-events-none"></div>
+
+                <div class="relative z-10 grid grid-cols-12 gap-2 items-center">
+                    <!-- Left Column Info (Cols 1-5) -->
+                    <div class="col-span-5 space-y-2 pr-1">
+                        <div class="flex items-start space-x-2">
+                            <i data-lucide="recycle" class="w-6 h-6 text-[#8CE563] flex-shrink-0 mt-0.5"></i>
+                            <h3 class="text-[14px] font-extrabold leading-tight text-white" data-i18n="life_title">
+                                Hành trình vòng đời sản phẩm
+                            </h3>
+                        </div>
+
+                        <p class="text-[9.5px] text-white/85 leading-relaxed">
+                            Từ nguyên liệu đến tái chế, Mindset luôn đồng hành cùng bạn trong hành trình xanh.
+                        </p>
+
+                        <button onclick="openModal('lifecycle')" class="mt-1 px-3 py-1.5 rounded-full bg-[#F4F6F0] hover:bg-white text-[#172B18] text-[9.5px] font-bold inline-flex items-center space-x-1 shadow-sm transition">
+                            <span data-i18n="btn_explore_journey">Khám phá hành trình</span>
+                            <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right Column 4 Circular Illustrated Badges (Cols 6-12) -->
+                    <div class="col-span-7 flex items-start justify-between pt-1">
+                        <!-- Stage 1: Nguyên liệu bền vững -->
+                        <div onclick="openLifecycleStage(1)" class="flex flex-col items-center text-center cursor-pointer group w-[60px]">
+                            <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-b from-white/80 to-emerald-400/50 shadow-md group-hover:scale-105 transition">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-[#2b4c26] relative flex items-center justify-center">
+                                    <!-- Pine Forest SVG Illustration -->
+                                    <svg viewBox="0 0 60 60" class="w-full h-full">
+                                        <rect width="60" height="60" fill="#78A865"/>
+                                        <circle cx="30" cy="18" r="14" fill="#B9E09B" opacity="0.6"/>
+                                        <!-- Pine trees -->
+                                        <polygon points="18,16 8,42 28,42" fill="#23491E"/>
+                                        <polygon points="42,18 32,44 52,44" fill="#2D5A27"/>
+                                        <polygon points="30,10 17,45 43,45" fill="#396E31"/>
+                                        <rect x="0" y="43" width="60" height="17" fill="#1D3B1A"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[8.5px] text-white/95 font-medium leading-tight mt-1.5">Nguyên liệu<br>bền vững</span>
+                        </div>
+
+                        <i data-lucide="arrow-right" class="w-3 h-3 text-white/70 mt-4 flex-shrink-0"></i>
+
+                        <!-- Stage 2: Sản xuất hiện đại -->
+                        <div onclick="openLifecycleStage(2)" class="flex flex-col items-center text-center cursor-pointer group w-[60px]">
+                            <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-b from-white/80 to-emerald-400/50 shadow-md group-hover:scale-105 transition">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-[#2b4c26] relative flex items-center justify-center">
+                                    <!-- Eco Factory SVG Illustration -->
+                                    <svg viewBox="0 0 60 60" class="w-full h-full">
+                                        <rect width="60" height="60" fill="#88B678"/>
+                                        <rect x="14" y="26" width="32" height="20" fill="#E9ECE6"/>
+                                        <polygon points="14,26 24,19 24,26 34,19 34,26 46,26" fill="#C5CCC2"/>
+                                        <rect x="37" y="13" width="6" height="13" fill="#B86B4B"/>
+                                        <rect x="18" y="31" width="5" height="6" fill="#4B6B4C"/>
+                                        <rect x="27" y="31" width="5" height="6" fill="#4B6B4C"/>
+                                        <rect x="36" y="31" width="5" height="6" fill="#4B6B4C"/>
+                                        <rect x="0" y="44" width="60" height="16" fill="#2F5D2A"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[8.5px] text-white/95 font-medium leading-tight mt-1.5">Sản xuất<br>hiện đại</span>
+                        </div>
+
+                        <i data-lucide="arrow-right" class="w-3 h-3 text-white/70 mt-4 flex-shrink-0"></i>
+
+                        <!-- Stage 3: Phân phối thông minh -->
+                        <div onclick="openLifecycleStage(3)" class="flex flex-col items-center text-center cursor-pointer group w-[60px]">
+                            <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-b from-white/80 to-emerald-400/50 shadow-md group-hover:scale-105 transition">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-[#3c5e30] relative flex items-center justify-center">
+                                    <!-- 3D Isometric Cardboard Box SVG -->
+                                    <svg viewBox="0 0 60 60" class="w-full h-full">
+                                        <rect width="60" height="60" fill="#5D8948"/>
+                                        <!-- Top face -->
+                                        <polygon points="30,13 48,21 30,29 12,21" fill="#E3B778"/>
+                                        <!-- Left face -->
+                                        <polygon points="12,21 30,29 30,47 12,39" fill="#C89654"/>
+                                        <!-- Right face -->
+                                        <polygon points="30,29 48,21 48,39 30,47" fill="#A97838"/>
+                                        <!-- Tape strip -->
+                                        <polygon points="21,17 39,25 39,30 35,32 35,26 17,18" fill="#F3DCB3" opacity="0.8"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span class="text-[8.5px] text-white/95 font-medium leading-tight mt-1.5">Phân phối<br>thông minh</span>
+                        </div>
+
+                        <i data-lucide="arrow-right" class="w-3 h-3 text-white/70 mt-4 flex-shrink-0"></i>
+
+                        <!-- Stage 4: Tái chế vì tương lai -->
+                        <div onclick="openLifecycleStage(4)" class="flex flex-col items-center text-center cursor-pointer group w-[60px]">
+                            <div class="w-12 h-12 rounded-full p-0.5 bg-gradient-to-b from-white/80 to-emerald-400/50 shadow-md group-hover:scale-105 transition">
+                                <div class="w-full h-full rounded-full overflow-hidden bg-[#295426] relative flex items-center justify-center">
+                                    <i data-lucide="recycle" class="w-6 h-6 text-white drop-shadow"></i>
+                                </div>
+                            </div>
+                            <span class="text-[8.5px] text-white/95 font-medium leading-tight mt-1.5">Tái chế<br>vì tương lai</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- G. CARD 5: HƯỚNG DẪN SỬ DỤNG & BẢO QUẢN -->
+            <section id="sec-khac" class="dpp-card p-3.5 relative overflow-hidden">
+                <!-- Decorative Green Leaves at Bottom Right -->
+                <svg class="absolute -right-2 -bottom-3 w-24 h-20 pointer-events-none" viewBox="0 0 100 80">
+                    <path d="M45 75 C52 45 72 25 92 20 C88 48 70 68 48 76 Z" fill="#5E8F44" opacity="0.9"/>
+                    <path d="M50 75 Q70 48 88 24" stroke="#9BC481" stroke-width="1.2" fill="none"/>
+                    <path d="M35 78 C22 60 12 52 2 52 C12 68 24 76 38 78 Z" fill="#77A65A" opacity="0.85"/>
+                </svg>
+
+                <!-- Top Row Header -->
+                <div class="flex items-center justify-between mb-3 relative z-10">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="book-open" class="w-4 h-4 text-[#254D26]"></i>
+                        <h3 class="text-[13.5px] font-extrabold text-[#162317]" data-i18n="care_title">
+                            Hướng dẫn sử dụng & bảo quản
+                        </h3>
+                    </div>
+
+                    <button onclick="openModal('care')" class="px-3 py-1 rounded-full bg-[#1F3C21] hover:bg-[#2b522d] text-white text-[10px] font-semibold flex items-center space-x-1 transition shadow-xs">
+                        <span data-i18n="btn_see_detail">Xem chi tiết</span>
+                        <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- 4-Column Care Icons Grid -->
+                <div class="grid grid-cols-4 divide-x divide-slate-200/90 text-center relative z-10 pt-0.5 pb-1">
+                    <!-- Item 1 -->
+                    <div class="px-1.5 flex flex-col items-center space-y-1.5">
+                        <i data-lucide="thermometer" class="w-4 h-4 text-[#254D26]"></i>
+                        <span class="text-[9.5px] text-[#2E3B2F] font-medium leading-tight">
+                            Tránh đựng<br>đồ quá nóng
+                        </span>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="px-1.5 flex flex-col items-center space-y-1.5">
+                        <i data-lucide="droplet" class="w-4 h-4 text-[#254D26]"></i>
+                        <span class="text-[9.5px] text-[#2E3B2F] font-medium leading-tight">
+                            Vệ sinh định kỳ<br>bằng nước ấm
+                        </span>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="px-1.5 flex flex-col items-center space-y-1.5">
+                        <i data-lucide="sun" class="w-4 h-4 text-[#254D26]"></i>
+                        <span class="text-[9.5px] text-[#2E3B2F] font-medium leading-tight">
+                            Bảo quản nơi<br>khô ráo
+                        </span>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="px-1.5 flex flex-col items-center space-y-1.5">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-[#254D26]"></i>
+                        <span class="text-[9.5px] text-[#2E3B2F] font-medium leading-tight">
+                            Sử dụng bền lâu<br>cùng Mindset
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========================================== -->
+        <!-- H. FOOTER (WITH NEW MINDSET LOGO)          -->
+        <!-- ========================================== -->
+        <footer class="bg-[#182419] text-white px-4 pt-4 pb-3 mt-auto border-t border-white/10">
+            <div class="flex items-center justify-between gap-2 pb-3 border-b border-white/10">
+                <!-- Left: New Mindset Logo + Tagline -->
+                <div class="flex items-center space-x-2 pr-2">
+                    <svg class="w-9 h-8 flex-shrink-0" viewBox="0 0 120 110">
+                        <use href="#mindset-logo-mark" />
+                    </svg>
+                    <div>
+                        <div class="relative inline-block">
+                            <span class="font-extrabold text-[15px] tracking-tight text-white leading-none block">Mindset</span>
+                            <span class="w-1.5 h-0.5 bg-[#F5B800] absolute left-[13px] top-[1px] transform -skew-x-12"></span>
+                        </div>
+                        <span class="text-[8.5px] text-white/70 block mt-0.5 whitespace-nowrap">Live Mindful. Live Better.</span>
+                    </div>
+                </div>
+
+                <!-- Vertical Divider -->
+                <div class="h-7 w-[1px] bg-white/20"></div>
+
+                <!-- Center: 4 Social Media Icons (YouTube, Facebook, Instagram, TikTok) -->
+                <div class="flex items-center space-x-2.5 px-1">
+                    <!-- YouTube -->
+                    <button onclick="showToast('Đang mở kênh YouTube Mindset')" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition" aria-label="YouTube">
+                        <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
+                            <path d="M23.5 6.2c-.3-1-1-1.8-2-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.5.6c-1 .3-1.7 1.1-2 2.1C0 8.1 0 12 0 12s0 3.9.5 5.8c.3 1 1 1.8 2 2.1 1.9.6 9.5.6 9.5.6s7.6 0 9.5-.6c1-.3 1.7-1.1 2-2.1.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z"/>
+                        </svg>
+                    </button>
+                    <!-- Facebook -->
+                    <button onclick="showToast('Đang mở trang Facebook Mindset')" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition" aria-label="Facebook">
+                        <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
+                            <path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12z"/>
+                        </svg>
+                    </button>
+                    <!-- Instagram -->
+                    <button onclick="showToast('Đang mở Instagram Mindset')" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition" aria-label="Instagram">
+                        <i data-lucide="instagram" class="w-3.5 h-3.5 text-white"></i>
+                    </button>
+                    <!-- TikTok -->
+                    <button onclick="showToast('Đang mở kênh TikTok Mindset')" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/25 flex items-center justify-center transition" aria-label="TikTok">
+                        <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Vertical Divider -->
+                <div class="h-7 w-[1px] bg-white/20"></div>
+
+                <!-- Right: Khám phá thêm Button -->
+                <button onclick="openModal('qr')" class="px-3 py-1.5 rounded-full border border-white/40 hover:bg-white/10 text-[10px] font-medium text-white flex items-center space-x-1 whitespace-nowrap transition">
+                    <span data-i18n="btn_discover_more">Khám phá thêm</span>
+                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                </button>
+            </div>
+
+            <!-- Copyright + iOS Home Indicator -->
+            <div class="pt-2.5 text-center space-y-2.5">
+                <p class="text-[9.5px] text-white/65">© 2026 Mindset. All rights reserved.</p>
+                <div id="ios-home-bar" class="w-32 h-1 bg-white/80 rounded-full mx-auto"></div>
+            </div>
+        </footer>
+
+        <!-- ========================================== -->
+        <!-- INTERACTIVE MODAL DRAWER FOR DPP DETAILS   -->
+        <!-- ========================================== -->
+        <div id="dpp-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/60 backdrop-blur-xs p-0 sm:p-4">
+            <div class="w-full max-w-[480px] bg-[#F8FAF5] rounded-t-[28px] sm:rounded-[28px] shadow-2xl border border-emerald-900/10 overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
+                <!-- Modal Header -->
+                <div class="bg-[#182D19] text-white px-5 py-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-2.5">
+                        <svg class="w-7 h-7" viewBox="0 0 120 110">
+                            <use href="#mindset-logo-mark" />
+                        </svg>
+                        <div>
+                            <h4 id="modal-title" class="font-bold text-sm text-white">Thông tin chi tiết Hộ chiếu số</h4>
+                            <span class="text-[10px] text-emerald-300 font-mono">ID: DPP-MS-2026-8842</span>
+                        </div>
+                    </div>
+                    <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div id="modal-body" class="p-5 overflow-y-auto space-y-4 text-xs text-slate-700">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="px-5 py-3 bg-slate-100 border-t border-slate-200 flex justify-between items-center">
+                    <span class="text-[10px] text-slate-500 flex items-center space-x-1">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+                        <span>Xác thực Blockchain bởi Mindset</span>
+                    </span>
+                    <button onclick="closeModal()" class="px-4 py-1.5 rounded-full bg-[#234B24] text-white text-xs font-semibold hover:bg-emerald-800 transition">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="fixed bottom-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-[#182819] text-white px-4 py-2.5 rounded-full shadow-xl flex items-center space-x-2 text-xs font-medium border border-emerald-500/30 pointer-events-none">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-[#8CE563]"></i>
+        <span id="toast-text">Đã cập nhật</span>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Tab Selection & Smooth Scroll + Highlight Effect
+        const tabMap = {
+            'tong-quan': 'sec-tong-quan',
+            'vat-lieu': 'sec-vat-lieu',
+            'tac-dong': 'sec-tac-dong',
+            'vong-doi': 'sec-vong-doi',
+            'khac': 'sec-khac'
+        };
+
+        function selectTab(tabKey) {
+            Object.keys(tabMap).forEach(key => {
+                const btn = document.getElementById(`nav-${key}`);
+                const icon = btn.querySelector('svg');
+                if (key === tabKey) {
+                    btn.className = "flex-1 py-2 px-2 rounded-[14px] bg-[#254D26] text-white flex flex-col items-center justify-center space-y-0.5 transition relative shadow-sm";
+                    if (icon) icon.classList.remove('text-[#2F5A2F]');
+                } else {
+                    btn.className = "flex-1 py-2 px-2 rounded-[14px] text-[#2B3B2C] hover:bg-emerald-900/5 flex flex-col items-center justify-center space-y-0.5 transition";
+                    if (icon) icon.classList.add('text-[#2F5A2F]');
+                }
+            });
+
+            const targetEl = document.getElementById(tabMap[tabKey]);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetEl.classList.add('ring-2', 'ring-[#254D26]');
+                setTimeout(() => targetEl.classList.remove('ring-2', 'ring-[#254D26]'), 1400);
+            }
+        }
+
+        // Frame Mode Switcher (iPhone Mockup vs Full Responsive Web)
+        function setFrameMode(mode) {
+            const shell = document.getElementById('app-shell');
+            const iosChrome = document.getElementById('ios-chrome');
+            const iosHomeBar = document.getElementById('ios-home-bar');
+            const btnMobile = document.getElementById('btn-frame-mobile');
+            const btnWeb = document.getElementById('btn-frame-web');
+
+            if (mode === 'web') {
+                shell.classList.remove('max-w-[500px]', 'sm:rounded-[44px]', 'sm:border-[8px]');
+                shell.classList.add('max-w-[640px]', 'sm:rounded-2xl', 'sm:border');
+                iosChrome.classList.add('hidden');
+                iosHomeBar.classList.add('hidden');
+                btnWeb.className = "px-3 py-1 rounded-full bg-emerald-700 text-white font-medium transition text-[11px]";
+                btnMobile.className = "px-3 py-1 rounded-full text-emerald-200/70 hover:text-white font-medium transition text-[11px]";
+                showToast('Đã chuyển sang chế độ Web đầy đủ');
+            } else {
+                shell.classList.add('max-w-[500px]', 'sm:rounded-[44px]', 'sm:border-[8px]');
+                shell.classList.remove('max-w-[640px]', 'sm:rounded-2xl', 'sm:border');
+                iosChrome.classList.remove('hidden');
+                iosHomeBar.classList.remove('hidden');
+                btnMobile.className = "px-3 py-1 rounded-full bg-emerald-700 text-white font-medium transition text-[11px]";
+                btnWeb.className = "px-3 py-1 rounded-full text-emerald-200/70 hover:text-white font-medium transition text-[11px]";
+                showToast('Đã chuyển sang khung iPhone Mockup');
+            }
+        }
+
+        // Bilingual Support (VN / EN)
+        let currentLang = 'VN';
+        const i18nDict = {
+            VN: {
+                hero_title_1: 'Minh bạch hôm nay,',
+                hero_title_2: 'Bền vững ',
+                hero_title_3: 'ngày mai',
+                hero_desc: 'Khám phá toàn bộ hành trình và giá trị bền vững của sản phẩm Mindset.',
+                tab_overview: 'Tổng quan',
+                tab_material: 'Vật liệu',
+                tab_impact: 'Tác động MT',
+                tab_lifecycle: 'Vòng đời',
+                tab_more: 'Khác',
+                prod_info_label: 'Thông tin sản phẩm',
+                btn_product_detail: 'Chi tiết sản phẩm',
+                prod_name: 'Bình giữ nhiệt Mindset',
+                prod_tagline: 'Đồng hành cùng bạn trong mọi hành trình',
+                spec_cap: 'Dung tích',
+                spec_temp: 'Giữ nhiệt',
+                spec_weight: 'Trọng lượng',
+                mat_title: 'Hồ sơ vật liệu',
+                mat_desc: 'Sản phẩm được làm từ thép không gỉ 304 cao cấp, an toàn cho sức khỏe và thân thiện với môi trường.',
+                btn_see_detail: 'Xem chi tiết',
+                cert_title: 'Chứng nhận',
+                cert_desc: 'Đạt các tiêu chuẩn chất lượng và an toàn quốc tế.',
+                imp_title: 'Tác động môi trường',
+                life_title: 'Hành trình vòng đời sản phẩm',
+                btn_explore_journey: 'Khám phá hành trình',
+                care_title: 'Hướng dẫn sử dụng & bảo quản',
+                btn_discover_more: 'Khám phá thêm'
+            },
+            EN: {
+                hero_title_1: 'Transparent Today,',
+                hero_title_2: 'Sustainable ',
+                hero_title_3: 'Tomorrow',
+                hero_desc: 'Explore the complete journey and sustainable value of your Mindset product.',
+                tab_overview: 'Overview',
+                tab_material: 'Materials',
+                tab_impact: 'Eco Impact',
+                tab_lifecycle: 'Lifecycle',
+                tab_more: 'More',
+                prod_info_label: 'Product Information',
+                btn_product_detail: 'Product Details',
+                prod_name: 'Mindset Vacuum Flask',
+                prod_tagline: 'Your mindful companion on every journey',
+                spec_cap: 'Capacity',
+                spec_temp: 'Insulation',
+                spec_weight: 'Weight',
+                mat_title: 'Material Profile',
+                mat_desc: 'Crafted from premium food-grade 304 stainless steel, safe for health and eco-friendly.',
+                btn_see_detail: 'View details',
+                cert_title: 'Certifications',
+                cert_desc: 'Meets international quality and food-safety standards.',
+                imp_title: 'Environmental Impact',
+                life_title: 'Product Lifecycle Journey',
+                btn_explore_journey: 'Explore Journey',
+                care_title: 'Usage & Care Guide',
+                btn_discover_more: 'Discover More'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'VN' ? 'EN' : 'VN';
+            document.getElementById('lang-label').textContent = currentLang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18nDict[currentLang][key]) {
+                    el.textContent = i18nDict[currentLang][key];
+                }
+            });
+            showToast(currentLang === 'VN' ? 'Đã chuyển sang Tiếng Việt' : 'Switched to English');
+        }
+
+        // Rich Modal Content Generator
+        function openModal(type) {
+            const modal = document.getElementById('dpp-modal');
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+
+            if (type === 'product') {
+                title.textContent = 'Thông tin chi tiết — Bình giữ nhiệt Mindset';
+                body.innerHTML = `
+                    <div class="p-3.5 bg-white rounded-2xl border border-slate-200 space-y-2">
+                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="text-slate-500">Tên sản phẩm</span>
+                            <span class="font-bold text-slate-900">Bình giữ nhiệt Mindset Signature</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="text-slate-500">Mã lô sản xuất (Batch)</span>
+                            <span class="font-mono font-bold text-emerald-700">#MS-2026-VN08</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="text-slate-500">Ngày xuất xưởng</span>
+                            <span class="font-semibold text-slate-800">15/02/2026</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-slate-100">
+                            <span class="text-slate-500">Cấu trúc cách nhiệt</span>
+                            <span class="font-semibold text-slate-800">2 lớp Inox 304 + Chân không mạ đồng</span>
+                        </div>
+                        <div class="flex justify-between py-1">
+                            <span class="text-slate-500">Bảo hành điện tử</span>
+                            <span class="font-bold text-emerald-700">24 tháng chính hãng</span>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'material') {
+                title.textContent = 'Hồ sơ vật liệu & Độ tinh khiết (Inox 304)';
+                body.innerHTML = `
+                    <div class="space-y-3">
+                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-900">Thép không gỉ Austenitic SUS304</span>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">82% Khối lượng</span>
+                            </div>
+                            <p class="text-slate-600 text-[11px]">Chứa 18% Crom và 8% Niken, chống oxy hóa tuyệt đối, không chứa BPA và không thôi nhiễm kim loại nặng.</p>
+                        </div>
+                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-900">Nắp nhựa PP nguyên sinh & Gioăng Silicon y tế</span>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">14% Khối lượng</span>
+                            </div>
+                            <p class="text-slate-600 text-[11px]">Chịu nhiệt lên tới 120°C, tháo rời dễ dàng để vệ sinh và tái chế riêng biệt.</p>
+                        </div>
+                        <div class="p-3.5 bg-white rounded-2xl border border-slate-200">
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="font-bold text-slate-900">Sơn tĩnh điện Powder Coating không dung môi</span>
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded-full text-[11px]">4% Khối lượng</span>
+                            </div>
+                            <p class="text-slate-600 text-[11px]">Bề mặt nhám Matte Black chống bám vân tay, không phát thải VOC trong quá trình phủ.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'cert') {
+                title.textContent = 'Chứng nhận chất lượng & An toàn quốc tế';
+                body.innerHTML = `
+                    <div class="space-y-2.5">
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center space-x-3">
+                            <div class="w-12 h-10 rounded-xl bg-blue-50 text-blue-800 font-black flex items-center justify-center text-xs">ISO</div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">ISO 9001:2015 & ISO 14001</h5>
+                                <p class="text-[11px] text-slate-500">Hệ thống quản lý chất lượng và môi trường chuẩn quốc tế.</p>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center space-x-3">
+                            <div class="w-12 h-10 rounded-xl bg-emerald-50 text-emerald-800 font-black flex items-center justify-center text-xs">RoHS</div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Chứng chỉ RoHS Châu Âu</h5>
+                                <p class="text-[11px] text-slate-500">Cam kết 100% không chì (Lead-free), thủy ngân hay Cadmium.</p>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-center space-x-3">
+                            <div class="w-12 h-10 rounded-xl bg-amber-50 text-slate-800 font-black flex items-center justify-center text-xs">SGS</div>
+                            <div>
+                                <h5 class="font-bold text-slate-900">Kiểm định tiếp xúc thực phẩm SGS</h5>
+                                <p class="text-[11px] text-slate-500">Đạt chuẩn QCVN 12-3:2011/BYT về an toàn vệ sinh thực phẩm.</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'impact') {
+                title.textContent = 'Báo cáo Dấu chân Carbon (1.24 kg CO₂e)';
+                body.innerHTML = `
+                    <div class="p-4 bg-emerald-900 text-white rounded-2xl flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-emerald-200 uppercase tracking-wider">Tổng phát thải vòng đời</span>
+                            <div class="text-2xl font-extrabold mt-0.5">1.24 kg CO₂e</div>
+                            <span class="text-[11px] text-[#8CE563]">Giảm 32% so với bình giữ nhiệt thông thường (1.82 kg)</span>
+                        </div>
+                        <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center font-extrabold text-sm">CO₂</div>
+                    </div>
+                    <div class="p-3.5 bg-white rounded-2xl border border-slate-200 space-y-2.5">
+                        <div>
+                            <div class="flex justify-between text-[11px] mb-1"><span>Nguyên liệu (85% Inox tái chế)</span><span class="font-bold">0.62 kg</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-600 w-[50%]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] mb-1"><span>Sản xuất bằng điện mặt trời áp mái</span><span class="font-bold">0.34 kg</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-emerald-500 w-[27%]"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-[11px] mb-1"><span>Bao bì giấy FSC & Vận chuyển xanh</span><span class="font-bold">0.28 kg</span></div>
+                            <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-lime-500 w-[23%]"></div></div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'lifecycle') {
+                title.textContent = 'Hành trình vòng đời khép kín Mindset';
+                body.innerHTML = `
+                    <div class="space-y-2.5">
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-bold text-emerald-700">GIAI ĐOẠN 1 • NGUYÊN LIỆU BỀN VỮNG</span>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Sử dụng 85% thép không gỉ 304 tái chế có chứng nhận nguồn gốc, giảm khai thác quặng mới.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-bold text-emerald-700">GIAI ĐOẠN 2 • SẢN XUẤT HIỆN ĐẠI</span>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Dây chuyền hàn laser không chì, sử dụng năng lượng tái tạo và tuần hoàn 95% lượng nước làm mát.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-bold text-emerald-700">GIAI ĐOẠN 3 • PHÂN PHỐI THÔNG MINH</span>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Hộp giấy Kraft đạt chuẩn FSC 100% không màng nilon, mực in đậu nành thân thiện sinh thái.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200">
+                            <span class="text-[10px] font-bold text-emerald-700">GIAI ĐOẠN 4 • TÁI CHẾ VÌ TƯƠNG LAI</span>
+                            <p class="text-[11px] text-slate-600 mt-0.5">Chương trình "Thu cũ đổi xanh" tại mọi điểm bán Mindset — hoàn tiền 15% khi gửi lại bình cũ để tái chế.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'care') {
+                title.textContent = 'Hướng dẫn sử dụng & Bảo quản bền lâu';
+                body.innerHTML = `
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-start space-x-2.5">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <p class="text-[11px] text-slate-600"><strong>Tránh đựng đồ quá nóng/có gas:</strong> Chừa khoảng trống 2cm dưới cổ bình khi đựng nước sôi trên 90°C để tránh áp suất đẩy nắp.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-start space-x-2.5">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <p class="text-[11px] text-slate-600"><strong>Vệ sinh định kỳ bằng nước ấm:</strong> Sử dụng cọ mềm cùng nước ấm hoặc baking soda pha loãng; không dùng búi sắt chà xát lòng bình.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-start space-x-2.5">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <p class="text-[11px] text-slate-600"><strong>Bảo quản nơi khô ráo:</strong> Để ráo tự nhiên và mở nắp khi không sử dụng trong thời gian dài.</p>
+                        </div>
+                        <div class="p-3 bg-white rounded-2xl border border-slate-200 flex items-start space-x-2.5">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center flex-shrink-0">4</span>
+                            <p class="text-[11px] text-slate-600"><strong>Thay thế linh kiện dễ dàng:</strong> Mindset cung cấp gioăng silicon và nắp lẻ thay thế suốt vòng đời sản phẩm.</p>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'qr') {
+                title.textContent = 'Chia sẻ Hộ chiếu số — dpp.mindset.vn';
+                body.innerHTML = `
+                    <div class="text-center space-y-3 py-2">
+                        <div class="w-36 h-36 mx-auto bg-white p-3 rounded-2xl border-2 border-[#234B24] shadow-sm flex items-center justify-center">
+                            <!-- Crisp SVG QR Code -->
+                            <svg viewBox="0 0 100 100" class="w-full h-full fill-[#142316]">
+                                <path d="M5,5 h28 v28 h-28 z M11,11 v16 h16 v-16 z M15,15 h8 v8 h-8 z"/>
+                                <path d="M67,5 h28 v28 h-28 z M73,11 v16 h16 v-16 z M77,15 h8 v8 h-8 z"/>
+                                <path d="M5,67 h28 v28 h-28 z M11,73 v16 h16 v-16 z M15,77 h8 v8 h-8 z"/>
+                                <rect x="40" y="5" width="6" height="6"/><rect x="52" y="5" width="6" height="12"/>
+                                <rect x="40" y="18" width="12" height="6"/><rect x="40" y="30" width="6" height="12"/>
+                                <rect x="5" y="40" width="12" height="6"/><rect x="24" y="40" width="12" height="6"/>
+                                <rect x="42" y="42" width="16" height="16" rx="3" fill="#254D26"/>
+                                <rect x="64" y="40" width="12" height="6"/><rect x="82" y="40" width="13" height="6"/>
+                                <rect x="40" y="64" width="6" height="12"/><rect x="52" y="68" width="12" height="6"/>
+                                <rect x="70" y="64" width="12" height="12"/><rect x="86" y="70" width="9" height="12"/>
+                                <rect x="40" y="84" width="18" height="11"/><rect x="66" y="84" width="12" height="11"/>
+                            </svg>
+                        </div>
+                        <p class="text-xs font-semibold text-slate-800">Quét mã QR để truy xuất nguồn gốc Bình giữ nhiệt Mindset</p>
+                        <button onclick="copyDppLink()" class="px-4 py-2 rounded-full bg-[#234B24] text-white text-xs font-semibold inline-flex items-center space-x-1.5 shadow-sm hover:bg-emerald-800 transition">
+                            <span>Sao chép liên kết https://dpp.mindset.vn</span>
+                        </button>
+                    </div>
+                `;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openLifecycleStage(stageNum) {
+            openModal('lifecycle');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('dpp-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function copyDppLink() {
+            const dummy = document.createElement('textarea');
+            dummy.value = 'https://dpp.mindset.vn/product/MS-THERMO-500';
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            closeModal();
+            showToast('Đã sao chép liên kết dpp.mindset.vn!');
+        }
+
+        function reloadPassport() {
+            showToast('Đã đồng bộ dữ liệu Hộ chiếu số mới nhất');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const text = document.getElementById('toast-text');
+            text.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2600);
+        }
+    
+        // --- ĐỒNG BỘ DỮ LIỆU ĐỘNG TỪ BACKEND DATABASE THEO MÃ SẢN PHẨM TRÊN URL (/dpp/:id) ---
+        async function fetchProductFromBackend() {
+            try {
+                const pathParts = window.location.pathname.split('/').filter(Boolean);
+                const productId = (pathParts[0] === 'dpp' && pathParts[1]) ? pathParts[1] : 'MS-THERMO-500';
+                const res = await fetch(`/api/public/products/${encodeURIComponent(productId)}`);
+                if (!res.ok) return;
+                const product = await res.json();
+
+                // Cập nhật thông tin sản phẩm trên giao diện DPP công khai (Không có nút login)
+                const nameEl = document.querySelector('[data-i18n="prod_name"]');
+                const taglineEl = document.querySelector('[data-i18n="prod_tagline"]');
+                const matDescEl = document.querySelector('[data-i18n="mat_desc"]');
+
+                if (nameEl && product.name) {
+                    nameEl.textContent = product.name;
+                    i18nDict.VN.prod_name = product.name;
+                }
+                if (taglineEl && product.tagline) {
+                    taglineEl.textContent = product.tagline;
+                    i18nDict.VN.prod_tagline = product.tagline;
+                }
+                if (matDescEl && product.material_desc) {
+                    matDescEl.textContent = product.material_desc;
+                    i18nDict.VN.mat_desc = product.material_desc;
+                }
+
+                // Cập nhật 3 thông số kỹ thuật (Dung tích, Giữ nhiệt, Trọng lượng)
+                const specCapEl = document.querySelector('[data-i18n="spec_cap"]')?.nextElementSibling;
+                const specTempEl = document.querySelector('[data-i18n="spec_temp"]')?.nextElementSibling;
+                const specWeightEl = document.querySelector('[data-i18n="spec_weight"]')?.nextElementSibling;
+
+                if (specCapEl && product.capacity) specCapEl.textContent = product.capacity;
+                if (specTempEl && product.temperature) specTempEl.innerHTML = product.temperature.replace('/', '<br>/');
+                if (specWeightEl && product.weight) specWeightEl.textContent = product.weight;
+
+                // Cập nhật thông số CO2
+                const co2Box = document.querySelector('#sec-tac-dong .text-\\[14px\\]');
+                if (co2Box && product.co2_emission) {
+                    co2Box.textContent = product.co2_emission.replace(' CO₂e', '').replace(' CO2e', '');
+                }
+
+                // Lưu thông tin sản phẩm hiện tại để hiển thị trong Modal chi tiết
+                window._currentDppProduct = product;
+            } catch (e) {
+                console.log('Chế độ xem tĩnh hoặc chưa kết nối API:', e);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', fetchProductFromBackend);
+
+    </script>
+</body>
+</html>
