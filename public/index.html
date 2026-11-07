@@ -452,9 +452,11 @@
                         </svg>
 
                         <!-- Matte Black Mindset Bottle with New Logo -->
-                        <svg class="w-[74px] h-[146px] relative z-10 mb-1 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)]" viewBox="0 0 220 470">
+                        <svg id="default-product-illustration" class="w-[74px] h-[146px] relative z-10 mb-1 drop-shadow-[0_6px_10px_rgba(0,0,0,0.35)]" viewBox="0 0 220 470">
                             <use href="#mindset-thermos-bottle" />
                         </svg>
+                        <img id="dpp-product-image" alt="Ảnh sản phẩm Mindset"
+                            class="hidden absolute inset-0 z-10 w-full h-full object-contain p-3 drop-shadow-lg" />
                     </div>
 
                     <!-- Right Product Info & Specs (Cols 6-12) -->
@@ -1294,6 +1296,17 @@
                 const res = await fetch(`/api/public/products/${encodeURIComponent(productId)}`);
                 if (!res.ok) return;
                 const product = await res.json();
+                const productImage = document.getElementById('dpp-product-image');
+                const defaultIllustration = document.getElementById('default-product-illustration');
+                if (productImage && product.image_data) {
+                    productImage.src = product.image_data;
+                    productImage.classList.remove('hidden');
+                    if (defaultIllustration) defaultIllustration.classList.add('hidden');
+                } else if (productImage) {
+                    productImage.classList.add('hidden');
+                    if (defaultIllustration) defaultIllustration.classList.remove('hidden');
+                }
+
 
                 // Cập nhật thông tin sản phẩm trên giao diện DPP công khai (Không có nút login)
                 const nameEl = document.querySelector('[data-i18n="prod_name"]');
