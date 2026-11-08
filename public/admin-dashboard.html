@@ -23,9 +23,6 @@
             </div>
         </div>
         <div class="flex items-center space-x-3">
-            <a href="/dpp/MS-THERMO-500" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold transition">
-                Xem giao diện QR mẫu ↗
-            </a>
             <button onclick="logout()" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-xs font-bold transition">
                 Đăng xuất
             </button>
@@ -474,8 +471,13 @@
             <div id="qrcode-container" class="bg-white p-4 rounded-2xl border-2 border-emerald-800 shadow-inner inline-flex justify-center items-center mx-auto">
                 <div id="qrcode"></div>
             </div>
-            <p id="qr-modal-url" class="text-xs font-mono text-slate-500 break-all bg-slate-50 p-2 rounded-xl"></p>
-            <div class="flex space-x-2 pt-2">
+            <div>
+                <a id="qr-modal-visit-btn" href="#" target="_blank" rel="noopener noreferrer"
+                    class="w-full py-2.5 px-4 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 text-xs font-extrabold rounded-xl transition inline-flex items-center justify-center space-x-1.5 shadow-2xs">
+                    <span>Vào xem ↗</span>
+                </a>
+            </div>
+            <div class="flex space-x-2 pt-1">
                 <button onclick="downloadQrImage()" class="flex-1 py-2.5 bg-[#234B24] hover:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow transition">
                     Tải ảnh QR về máy ⬇
                 </button>
@@ -488,11 +490,16 @@
     
     <script>
         let _activeQrUrl = '';
+        let _activeQrProductId = '';
         function openQrModal(productId) {
-            const fullUrl = window.location.origin + '/dpp/' + productId;
+            const fullUrl = window.location.origin + '/dpp/' + encodeURIComponent(productId);
             _activeQrUrl = fullUrl;
+            _activeQrProductId = productId;
             document.getElementById('qr-modal-title').textContent = `Mã QR: ${productId}`;
-            document.getElementById('qr-modal-url').textContent = fullUrl;
+            const visitBtn = document.getElementById('qr-modal-visit-btn');
+            if (visitBtn) {
+                visitBtn.href = fullUrl;
+            }
             
             const qrContainer = document.getElementById('qrcode');
             qrContainer.innerHTML = '';
@@ -530,7 +537,7 @@
             if (!imageUrl) return;
             const link = document.createElement('a');
             link.href = imageUrl;
-            link.download = `QR-DPP-Mindset.png`;
+            link.download = `QR-DPP-${_activeQrProductId || 'Mindset'}.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
