@@ -16,6 +16,9 @@ app.use(express.json({ limit: '8mb' }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Endpoint nhẹ cho Cron-job / UptimeRobot giữ server thức
+app.get('/ping', (req, res) => res.status(200).send('OK'));
+
 function verifyAdminToken(req, res, next) {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
@@ -27,13 +30,17 @@ function verifyAdminToken(req, res, next) {
     });
 }
 
-function normalizeSpecs(rawSpecs, fallbackObj = {}) {
-    let arr = [];
-    if (Array.isArray(rawSpecs)) {
-        arr = rawSpecs;
-    } else if (typeof rawSpecs === 'string' && rawSpecs.trim()) {
-        try { arr = JSON.parse(rawSpecs); } catch (e) { arr = []; }
+function parseJsonSafe(raw, fallback) {
+    if (raw === null || raw === undefined) return fallback;
+    if (typeof raw === 'object') return raw;
+    if (typeof raw === 'string' && raw.trim()) {
+        try { return JSON.parse(raw); } catch (e) { return fallback; }
     }
+    return fallback;
+}
+
+function normalizeSpecs(rawSpecs, fallbackObj = {}) {
+    const arr = parseJsonSafe(rawSpecs, []);
     const cleaned = (Array.isArray(arr) ? arr : [])
         .map(item => ({
             label: String(item?.label || '').trim(),
@@ -49,12 +56,84 @@ function normalizeSpecs(rawSpecs, fallbackObj = {}) {
     return cleaned;
 }
 
+function normalizeMaterials(rawMaterials) {
+    const arr = parseJsonSafe(rawMaterials, []);
+    return (Array.isArray(arr) ? arr : [])
+        .map(item => ({
+            name: String(item?.name || '').trim(),
+            ratio: String(item?.ratio || '').trim(),
+            desc: String(item?.desc || '').trim()
+        }))
+        .filter(item => item.name !== '' || item.desc !== '');
+}
+
+function normalizeCertifications(rawCerts) {
+    const arr = parseJsonSafe(rawCerts, []);
+    return (Array.isArray(arr) ? arr : [])
+        .map(item => ({
+            badge: String(item?.badge || '').trim(),
+            title: String(item?.title || '').trim(),
+            desc: String(item?.desc || '').trim()
+        }))
+        .filter(item => item.badge !== '' || item.title !== '' || item.desc !== '');
+}
+
+function normalizeEnvImpact(rawEnv) {
+    const obj = parseJsonSafe(rawEnv, {});
+    const breakdownRaw = Array.isArray(obj?.breakdown) ? obj.breakdown : [];
+    const breakdown = breakdownRaw
+        .map(item => ({
+            label: String(item?.label || '').trim(),
+            value: String(item?.value || '').trim(),
+            percent: Number.isFinite(Number(item?.percent)) ? Number(item.percent) : 0
+        }))
+        .filter(item => item.label !== '' || item.value !== '');
+
+    return {
+        summary: String(obj?.summary || '').trim(),
+        comparison: String(obj?.comparison || '').trim(),
+        breakdown
+    };
+}
+
+function normalizeLifecycle(rawLifecycle) {
+    const arr = parseJsonSafe(rawLifecycle, []);
+    return (Array.isArray(arr) ? arr : [])
+        .map(item => ({
+            short_label: String(item?.short_label || '').trim(),
+            title: String(item?.title || '').trim(),
+            desc: String(item?.desc || '').trim()
+        }))
+        .filter(item => item.short_label !== '' || item.title !== '' || item.desc !== '');
+}
+
+function normalizeCareInstructions(rawCare) {
+    const arr = parseJsonSafe(rawCare, []);
+    return (Array.isArray(arr) ? arr : [])
+        .map(item => ({
+            short_label: String(item?.short_label || '').trim(),
+            title: String(item?.title || '').trim(),
+            desc: String(item?.desc || '').trim()
+        }))
+        .filter(item => item.short_label !== '' || item.title !== '' || item.desc !== '');
+}
+
 function formatProductRow(row) {
     if (!row) return null;
     return {
         ...row,
         category: row.category || '',
-        specs: normalizeSpecs(row.specs, row)
+        specs: normalizeSpecs(row.specs, row),
+        material_badge: row.material_badge || '',
+        material_desc: row.material_desc || '',
+        materials: normalizeMaterials(row.materials),
+        cert_summary: row.cert_summary || '',
+        certifications: normalizeCertifications(row.certifications),
+        co2_emission: row.co2_emission || '',
+        env_impact: normalizeEnvImpact(row.env_impact),
+        lifecycle_summary: row.lifecycle_summary || '',
+        lifecycle: normalizeLifecycle(row.lifecycle),
+        care_instructions: normalizeCareInstructions(row.care_instructions)
     };
 }
 
@@ -107,25 +186,42 @@ app.get('/api/admin/products', verifyAdminToken, async (req, res) => {
 
 const productFields = [
     'name', 'category', 'tagline', 'capacity', 'temperature', 'weight',
-    'specs', 'material_desc', 'co2_emission', 'batch_code', 'release_date', 'image_data'
+    'specs', 'material_badge', 'material_desc', 'materials',
+    'cert_summary', 'certifications', 'co2_emission', 'env_impact',
+    'lifecycle_summary', 'lifecycle', 'care_instructions',
+    'batch_code', 'release_date', 'image_data'
 ];
 
 function productValues(body) {
     const specs = normalizeSpecs(body.specs, body);
+    const materials = normalizeMaterials(body.materials);
+    const certifications = normalizeCertifications(body.certifications);
+    const env_impact = normalizeEnvImpact(body.env_impact);
+    const lifecycle = normalizeLifecycle(body.lifecycle);
+    const care_instructions = normalizeCareInstructions(body.care_instructions);
+
     const cap = specs[0]?.value || body.capacity?.trim() || '';
     const temp = specs[1]?.value || body.temperature?.trim() || '';
     const weight = specs[2]?.value || body.weight?.trim() || '';
 
     return [
-        body.name?.trim(),
+        body.name?.trim() || '',
         body.category?.trim() || '',
         body.tagline?.trim() || '',
         cap,
         temp,
         weight,
         JSON.stringify(specs),
+        body.material_badge?.trim() || '',
         body.material_desc?.trim() || '',
+        JSON.stringify(materials),
+        body.cert_summary?.trim() || '',
+        JSON.stringify(certifications),
         body.co2_emission?.trim() || '',
+        JSON.stringify(env_impact),
+        body.lifecycle_summary?.trim() || '',
+        JSON.stringify(lifecycle),
+        JSON.stringify(care_instructions),
         body.batch_code?.trim() || '',
         body.release_date?.trim() || '',
         body.image_data || null
@@ -138,7 +234,13 @@ app.post('/api/admin/products', verifyAdminToken, async (req, res) => {
         if (!id || !req.body.name) return res.status(400).json({ error: 'Mã sản phẩm (ID) và Tên sản phẩm là bắt buộc!' });
         const vals = [id.trim(), ...productValues(req.body)];
         await db.query(`INSERT INTO products (id, ${productFields.join(', ')}, updated_at)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,NOW())`, vals);
+            VALUES (
+                $1,$2,$3,$4,$5,$6,$7,
+                $8::jsonb,$9,$10,$11::jsonb,
+                $12,$13::jsonb,$14,$15::jsonb,
+                $16,$17::jsonb,$18::jsonb,
+                $19,$20,$21,NOW()
+            )`, vals);
         res.json({ message: 'Đã thêm sản phẩm DPP mới thành công!', id });
     } catch (err) {
         console.error('Create product error:', err);
@@ -151,8 +253,11 @@ app.put('/api/admin/products/:id', verifyAdminToken, async (req, res) => {
         const vals = [...productValues(req.body), req.params.id];
         const result = await db.query(`UPDATE products SET
             name=$1, category=$2, tagline=$3, capacity=$4, temperature=$5, weight=$6,
-            specs=$7::jsonb, material_desc=$8, co2_emission=$9, batch_code=$10, release_date=$11,
-            image_data=$12, updated_at=NOW() WHERE id=$13`, vals);
+            specs=$7::jsonb, material_badge=$8, material_desc=$9, materials=$10::jsonb,
+            cert_summary=$11, certifications=$12::jsonb, co2_emission=$13, env_impact=$14::jsonb,
+            lifecycle_summary=$15, lifecycle=$16::jsonb, care_instructions=$17::jsonb,
+            batch_code=$18, release_date=$19, image_data=$20, updated_at=NOW()
+            WHERE id=$21`, vals);
         if (!result.rowCount) return res.status(404).json({ error: 'Không tìm thấy sản phẩm cần sửa!' });
         res.json({ message: 'Cập nhật Hộ chiếu số thành công!' });
     } catch (err) {
