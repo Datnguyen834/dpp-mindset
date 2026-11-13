@@ -8,988 +8,170 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Be Vietnam Pro', sans-serif; }
-        .section-box {
-            background-color: #F8FAF5;
-            border: 1px solid rgba(20, 35, 22, 0.12);
-            border-radius: 16px;
-            padding: 14px;
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            overflow-x: hidden;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
-<body class="bg-[#F2F4EF] min-h-screen flex flex-col">
-    <!-- Top Header -->
-    <header class="bg-[#182419] text-white px-6 py-4 shadow-md flex items-center justify-between sticky top-0 z-40">
-        <div class="flex items-center space-x-3">
-            <img src="data:image/png;base64,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" alt="Mindset Logo" class="h-10 w-auto object-contain drop-shadow" />
-            <div>
-                <h1 class="font-extrabold text-base sm:text-lg tracking-tight">Mindset DPP — Quản trị Hộ chiếu số</h1>
-                <p class="text-[11px] text-emerald-200/80">Quản lý đồng bộ 100% các mục hiển thị: Thông số, Hồ sơ vật liệu, Chứng nhận, Tác động MT, Vòng đời & Hướng dẫn</p>
+<body class="bg-[#F2F4EF] min-h-screen flex flex-col text-slate-800">
+
+    <!-- Top Header (Tối ưu Mobile: chống gãy chữ nút Đăng xuất) -->
+    <header class="bg-[#182419] text-white px-3.5 sm:px-6 py-3.5 sm:py-4 shadow-md flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+            <img src="/logo.png" alt="Mindset Logo" class="h-9 sm:h-10 w-auto object-contain drop-shadow shrink-0" />
+            <div class="min-w-0">
+                <h1 class="font-extrabold text-sm sm:text-lg leading-snug tracking-tight text-white">
+                    Mindset DPP — Quản trị Hộ chiếu số
+                </h1>
+                <p class="text-[11px] sm:text-xs text-emerald-200/85 leading-snug line-clamp-2">
+                    Quản lý đồng bộ 100% các mục hiển thị: Thông số, Hồ sơ vật liệu, Chứng nhận, Tác động MT, Vòng đời & Hướng dẫn
+                </p>
             </div>
         </div>
-        <div class="flex items-center space-x-3">
-            <button onclick="logout()" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-xs font-bold transition">
-                Đăng xuất
-            </button>
-        </div>
+        <button onclick="logout()" class="px-3.5 py-2 rounded-xl bg-red-600 hover:bg-red-700 active:scale-95 text-xs font-bold text-white transition whitespace-nowrap shrink-0 shadow-sm">
+            Đăng xuất
+        </button>
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
-        <!-- Left Column: Form Thêm / Sửa Sản phẩm Đầy đủ các mục (6 Cols) -->
-        <section class="lg:col-span-6 bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200/80 h-fit">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                <h2 id="form-title" class="text-base font-extrabold text-[#142316]">➕ Thêm Sản phẩm DPP mới</h2>
-                <div class="flex items-center space-x-2">
-                    <button type="button" onclick="fillSampleTemplate()"
-                        class="px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-[11px] font-bold transition">
-                        ⚡ Điền mẫu nhanh các mục
-                    </button>
-                    <button type="button" id="btn-cancel-edit" onclick="resetForm()" class="hidden px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition">
-                        Hủy sửa
-                    </button>
-                </div>
+    <main class="max-w-6xl w-full mx-auto p-3 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 flex-1">
+
+        <!-- Left Column: Form Thêm / Sửa Sản phẩm (5 Cols) -->
+        <section class="lg:col-span-5 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-200/80 h-fit">
+            <div class="flex items-center justify-between gap-2 mb-4">
+                <h2 id="form-title" class="text-sm sm:text-base font-extrabold text-[#142316]">➕ Thêm Sản phẩm DPP mới</h2>
+                <button type="button" id="btn-cancel-edit" onclick="resetForm()" class="hidden px-2.5 py-1 rounded-lg bg-slate-100 text-xs font-semibold text-slate-600 hover:text-slate-900 whitespace-nowrap shrink-0">
+                    Hủy sửa
+                </button>
             </div>
 
-            <!-- Quick Jump Bar -->
-            <div class="flex flex-wrap gap-1.5 mb-4 pb-3 border-b border-slate-100 text-[11px] font-semibold">
-                <span class="text-slate-400 self-center mr-1">Chuyển nhanh:</span>
-                <a href="#admin-sec-specs" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">📋 Thông số</a>
-                <a href="#admin-sec-materials" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">🧪 Hồ sơ vật liệu</a>
-                <a href="#admin-sec-certs" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">🏅 Chứng nhận</a>
-                <a href="#admin-sec-impact" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">🌱 Tác động MT</a>
-                <a href="#admin-sec-lifecycle" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">🔄 Vòng đời</a>
-                <a href="#admin-sec-care" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-emerald-50 text-slate-700">📘 Hướng dẫn</a>
-            </div>
-
-            <form id="product-form" class="space-y-4 text-xs">
+            <form id="product-form" class="space-y-3.5 text-xs">
                 <input type="hidden" id="edit-mode" value="false">
 
-                <!-- 0. THÔNG TIN CƠ BẢN & ĐỊNH DANH QR -->
-                <div class="section-box space-y-3">
-                    <div class="font-extrabold text-[#142316] text-xs border-b border-slate-200/80 pb-1.5">
-                        🏷️ Thông tin định danh & Tổng quan sản phẩm
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+                    <div class="sm:col-span-7">
+                        <label class="block font-bold text-slate-700 mb-1">Mã định danh QR (Product ID) *</label>
+                        <input type="text" id="prod-id" placeholder="VD: MS-THERMO-500" required
+                            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl font-mono text-xs focus:ring-2 focus:ring-emerald-700 outline-none">
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-                        <div class="sm:col-span-7">
-                            <label class="block font-bold text-slate-700 mb-1">Mã định danh QR (Product ID) *</label>
-                            <input type="text" id="prod-id" placeholder="VD: MS-PROD-001" required
-                                class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl font-mono text-xs focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                        <div class="sm:col-span-5">
-                            <label class="block font-bold text-slate-700 mb-1">Ngành hàng / Loại SP</label>
-                            <input type="text" id="prod-category" placeholder="VD: Đồ uống, Phụ kiện..."
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
+                    <div class="sm:col-span-5">
+                        <label class="block font-bold text-slate-700 mb-1">Ngành hàng / Loại SP</label>
+                        <input type="text" id="prod-category" placeholder="VD: Bình giữ nhiệt..."
+                            class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-xs focus:ring-2 focus:ring-emerald-700 outline-none">
                     </div>
-                    <span class="block text-[10px] text-slate-400 -mt-1">Đường dẫn QR công khai: <code>/dpp/{Mã_sản_phẩm}</code></span>
+                </div>
+                <span class="block text-[10.5px] text-slate-400 -mt-2">Đường dẫn QR sẽ là: <code>/dpp/{Mã_sản_phẩm}</code></span>
 
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Tên sản phẩm *</label>
-                        <input type="text" id="prod-name" placeholder="VD: Bình giữ nhiệt Mindset, Cà phê Arabica, Áo thun Eco..." required
-                            class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                    </div>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Tên sản phẩm *</label>
+                    <input type="text" id="prod-name" placeholder="VD: Bình giữ nhiệt Mindset" required
+                        class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
+                </div>
 
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Ảnh sản phẩm</label>
-                        <input type="file" id="prod-image-file" accept="image/png,image/jpeg,image/webp"
-                            class="w-full px-3 py-2 border border-slate-300 rounded-xl bg-white">
-                        <p class="text-[10px] text-slate-400 mt-1">JPG, PNG hoặc WEBP · tối đa 4 MB. Ảnh được lưu trực tiếp cùng hồ sơ sản phẩm trên Neon.</p>
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Ảnh sản phẩm</label>
+                    <input type="file" id="prod-image-file" accept="image/png,image/jpeg,image/webp"
+                        class="w-full px-3 py-2 border border-slate-300 rounded-xl bg-white text-xs">
+                    <p class="text-[10.5px] text-slate-400 mt-1">JPG, PNG hoặc WEBP · tối đa 4 MB. Lưu trực tiếp trên Neon PostgreSQL.</p>
+                    <div class="flex items-center gap-3 mt-2">
                         <img id="prod-image-preview" alt="Xem trước ảnh sản phẩm"
-                            class="hidden mt-2 w-28 h-28 object-contain rounded-xl border border-slate-200 bg-white p-1">
+                            class="hidden w-24 h-24 object-contain rounded-xl border border-slate-200 bg-slate-50 p-1">
                         <button type="button" id="btn-remove-image" onclick="removeProductImage()"
-                            class="hidden mt-1.5 text-[11px] font-semibold text-red-600">Gỡ ảnh hiện tại</button>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Thông điệp phụ (Tagline)</label>
-                        <input type="text" id="prod-tagline" placeholder="VD: Đồng hành cùng bạn trong mọi hành trình"
-                            class="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Mã lô sản xuất (Batch)</label>
-                            <input type="text" id="prod-batch" placeholder="VD: #MS-2026-VN08"
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                        <div>
-                            <label class="block font-bold text-slate-700 mb-1">Ngày xuất xưởng</label>
-                            <input type="text" id="prod-date" placeholder="VD: 15/02/2026"
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
+                            class="hidden px-3 py-1.5 rounded-lg bg-red-50 text-[11px] font-semibold text-red-600 hover:bg-red-100">
+                            Gỡ ảnh hiện tại
+                        </button>
                     </div>
                 </div>
 
-                <!-- 1. DANH MỤC THÔNG SỐ & SỐ LIỆU ĐỘNG -->
-                <div id="admin-sec-specs" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Thông điệp phụ (Tagline)</label>
+                    <input type="text" id="prod-tagline" placeholder="VD: Đồng hành cùng bạn trong mọi hành trình"
+                        class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Mã lô (Batch)</label>
+                        <input type="text" id="prod-batch" placeholder="VD: #MS-2026-VN08"
+                            class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-700 mb-1">Ngày xuất xưởng</label>
+                        <input type="text" id="prod-date" placeholder="VD: 15/02/2026"
+                            class="w-full px-3 py-2 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
+                    </div>
+                </div>
+
+                <!-- 1. THÔNG SỐ KỸ THUẬT -->
+                <div class="p-3.5 rounded-2xl bg-[#F8FAF5] border border-emerald-900/15 space-y-2.5">
+                    <div class="flex items-center justify-between gap-2">
                         <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">📋 1. Danh mục thông số & Số liệu</label>
-                            <p class="text-[10px] text-slate-500">Hiển thị tại thẻ Thông tin sản phẩm & hộp thoại Chi tiết sản phẩm</p>
+                            <label class="block font-extrabold text-[#142316] text-xs">📋 1. Danh mục Thông số & Số liệu</label>
+                            <p class="text-[10.5px] text-slate-500">Hiển thị tại thẻ Thông tin sản phẩm</p>
                         </div>
                         <button type="button" onclick="addSpecRow('', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Tạo danh mục
+                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition whitespace-nowrap shrink-0">
+                            + Thêm thông số
                         </button>
                     </div>
-
                     <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý:</span>
-                        <button type="button" onclick="quickAddSpec('Dung tích', '500ml')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Dung tích</button>
-                        <button type="button" onclick="quickAddSpec('Giữ nhiệt', '12h nóng / 24h lạnh')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Giữ nhiệt</button>
-                        <button type="button" onclick="quickAddSpec('Trọng lượng', '320g')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Trọng lượng</button>
-                        <button type="button" onclick="quickAddSpec('Kích thước', 'Size L / 22x7cm')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Kích thước</button>
-                        <button type="button" onclick="quickAddSpec('Chất liệu', 'Inox 304 / Cotton hữu cơ')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Chất liệu</button>
-                        <button type="button" onclick="quickAddSpec('Xuất xứ', 'Việt Nam')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Xuất xứ</button>
-                        <button type="button" onclick="quickAddSpec('Bảo hành', '24 tháng')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Bảo hành</button>
+                        <button type="button" onclick="quickAddSpec('Dung tích', '500ml')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-semibold text-slate-600">+ Dung tích</button>
+                        <button type="button" onclick="quickAddSpec('Giữ nhiệt', '12h nóng / 24h lạnh')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-semibold text-slate-600">+ Giữ nhiệt</button>
+                        <button type="button" onclick="quickAddSpec('Trọng lượng', '320g')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-semibold text-slate-600">+ Trọng lượng</button>
+                        <button type="button" onclick="quickAddSpec('Xuất xứ', 'Việt Nam')" class="px-2 py-1 rounded-lg bg-white border border-slate-200 text-[10.5px] font-semibold text-slate-600">+ Xuất xứ</button>
                     </div>
-
                     <div id="specs-container" class="space-y-2 pt-1"></div>
                 </div>
 
                 <!-- 2. HỒ SƠ VẬT LIỆU -->
-                <div id="admin-sec-materials" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">🧪 2. Hồ sơ vật liệu & Thành phần cấu tạo</label>
-                            <p class="text-[10px] text-slate-500">Quản lý nội dung thẻ Hồ sơ vật liệu và danh sách thành phần chi tiết khi bấm Xem chi tiết</p>
-                        </div>
-                        <button type="button" onclick="addMaterialRow('', '', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Thêm vật liệu
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-                        <div class="sm:col-span-4">
-                            <label class="block font-bold text-slate-700 mb-1">Nhãn vật liệu góc phải</label>
-                            <input type="text" id="prod-material-badge" placeholder="VD: Inox 304, Organic..."
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                        <div class="sm:col-span-8">
-                            <label class="block font-bold text-slate-700 mb-1">Mô tả tóm tắt ngoài thẻ Hồ sơ vật liệu</label>
-                            <input type="text" id="prod-material" placeholder="VD: Sản phẩm được làm từ thép không gỉ 304 cao cấp, an toàn cho sức khỏe..."
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý thành phần:</span>
-                        <button type="button" onclick="addMaterialRow('Thép không gỉ Austenitic SUS304', '82% Khối lượng', 'Chứa 18% Crom và 8% Niken, chống oxy hóa tuyệt đối, không chứa BPA và không thôi nhiễm kim loại nặng.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Thép SUS304 (82%)</button>
-                        <button type="button" onclick="addMaterialRow('Nắp nhựa PP nguyên sinh & Gioăng Silicon y tế', '14% Khối lượng', 'Chịu nhiệt lên tới 120°C, tháo rời dễ dàng để vệ sinh và tái chế riêng biệt.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Nắp PP & Silicon (14%)</button>
-                        <button type="button" onclick="addMaterialRow('Sơn tĩnh điện Powder Coating không dung môi', '4% Khối lượng', 'Bề mặt nhám chống bám vân tay, không phát thải VOC trong quá trình phủ.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Sơn tĩnh điện (4%)</button>
-                    </div>
-
-                    <div id="materials-container" class="space-y-2 pt-1"></div>
-                </div>
-
-                <!-- 3. CHỨNG NHẬN & KIỂM ĐỊNH -->
-                <div id="admin-sec-certs" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">🏅 3. Chứng nhận & Tiêu chuẩn quốc tế</label>
-                            <p class="text-[10px] text-slate-500">Quản lý huy hiệu chứng nhận ngoài thẻ và danh sách giải thích chi tiết</p>
-                        </div>
-                        <button type="button" onclick="addCertRow('', '', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Thêm chứng nhận
-                        </button>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Mô tả tóm tắt ngoài thẻ Chứng nhận</label>
-                        <input type="text" id="prod-cert-summary" placeholder="VD: Đạt các tiêu chuẩn chất lượng và an toàn quốc tế."
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý nhanh:</span>
-                        <button type="button" onclick="addCertRow('ISO', 'ISO 9001:2015 & ISO 14001', 'Hệ thống quản lý chất lượng và môi trường chuẩn quốc tế.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ ISO 9001 & 14001</button>
-                        <button type="button" onclick="addCertRow('RoHS', 'Chứng chỉ RoHS Châu Âu', 'Cam kết 100% không chì (Lead-free), thủy ngân hay Cadmium.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ RoHS</button>
-                        <button type="button" onclick="addCertRow('SGS', 'Kiểm định tiếp xúc thực phẩm SGS', 'Đạt chuẩn QCVN 12-3:2011/BYT về an toàn vệ sinh thực phẩm.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ SGS</button>
-                        <button type="button" onclick="addCertRow('FSC', 'Chứng nhận rừng bền vững FSC', 'Bao bì giấy tái chế từ nguồn rừng được quản lý có trách nhiệm.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ FSC</button>
-                    </div>
-
-                    <div id="certs-container" class="space-y-2 pt-1"></div>
-                </div>
-
-                <!-- 4. TÁC ĐỘNG MÔI TRƯỜNG & BÁO CÁO CARBON -->
-                <div id="admin-sec-impact" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">🌱 4. Tác động môi trường & Dấu chân Carbon</label>
-                            <p class="text-[10px] text-slate-500">Quản lý tổng phát thải CO₂, thông điệp giảm phát thải và biểu đồ phân bổ chi tiết</p>
-                        </div>
-                        <button type="button" onclick="addImpactRow('', '', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Thêm hạng mục CO₂
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
-                        <div class="sm:col-span-4">
-                            <label class="block font-bold text-slate-700 mb-1">Tổng phát thải CO₂</label>
-                            <input type="text" id="prod-co2" placeholder="VD: 1.24 kg"
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                        <div class="sm:col-span-8">
-                            <label class="block font-bold text-slate-700 mb-1">Thông điệp ngắn trên thẻ Tác động MT</label>
-                            <input type="text" id="prod-env-summary" placeholder="VD: Giảm phát thải CO₂ ≈ 32% so với sản phẩm truyền thống."
-                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Dòng so sánh chi tiết trong Báo cáo Carbon</label>
-                        <input type="text" id="prod-env-comparison" placeholder="VD: Giảm 32% so với bình giữ nhiệt thông thường (1.82 kg)"
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý phân bổ:</span>
-                        <button type="button" onclick="addImpactRow('Nguyên liệu (85% Inox tái chế)', '0.62 kg', 50)" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Nguyên liệu (50%)</button>
-                        <button type="button" onclick="addImpactRow('Sản xuất bằng điện mặt trời áp mái', '0.34 kg', 27)" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Sản xuất (27%)</button>
-                        <button type="button" onclick="addImpactRow('Bao bì giấy FSC & Vận chuyển xanh', '0.28 kg', 23)" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Bao bì & Vận chuyển (23%)</button>
-                    </div>
-
-                    <div id="impact-container" class="space-y-2 pt-1"></div>
-                </div>
-
-                <!-- 5. HÀNH TRÌNH VÒNG ĐỜI SẢN PHẨM -->
-                <div id="admin-sec-lifecycle" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">🔄 5. Hành trình vòng đời sản phẩm</label>
-                            <p class="text-[10px] text-slate-500">Quản lý các giai đoạn từ nguyên liệu, sản xuất, phân phối đến tái chế</p>
-                        </div>
-                        <button type="button" onclick="addLifecycleRow('', '', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Thêm giai đoạn
-                        </button>
-                    </div>
-
-                    <div>
-                        <label class="block font-bold text-slate-700 mb-1">Mô tả tóm tắt ngoài thẻ Vòng đời</label>
-                        <input type="text" id="prod-lifecycle-summary" placeholder="VD: Từ nguyên liệu đến tái chế, Mindset luôn đồng hành cùng bạn trong hành trình xanh."
-                            class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-700 outline-none">
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý chặng:</span>
-                        <button type="button" onclick="addLifecycleRow('Nguyên liệu bền vững', 'GIAI ĐOẠN 1 • NGUYÊN LIỆU BỀN VỮNG', 'Sử dụng 85% thép không gỉ 304 tái chế có chứng nhận nguồn gốc, giảm khai thác quặng mới.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ 1. Nguyên liệu</button>
-                        <button type="button" onclick="addLifecycleRow('Sản xuất hiện đại', 'GIAI ĐOẠN 2 • SẢN XUẤT HIỆN ĐẠI', 'Dây chuyền hàn laser không chì, sử dụng năng lượng tái tạo và tuần hoàn 95% lượng nước làm mát.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ 2. Sản xuất</button>
-                        <button type="button" onclick="addLifecycleRow('Phân phối thông minh', 'GIAI ĐOẠN 3 • PHÂN PHỐI THÔNG MINH', 'Hộp giấy Kraft đạt chuẩn FSC 100% không màng nilon, mực in đậu nành thân thiện sinh thái.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ 3. Phân phối</button>
-                        <button type="button" onclick="addLifecycleRow('Tái chế vì tương lai', 'GIAI ĐOẠN 4 • TÁI CHẾ VÌ TƯƠNG LAI', 'Chương trình Thu cũ đổi xanh tại mọi điểm bán Mindset — hoàn tiền 15% khi gửi lại bình cũ để tái chế.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ 4. Tái chế</button>
-                    </div>
-
-                    <div id="lifecycle-container" class="space-y-2 pt-1"></div>
-                </div>
-
-                <!-- 6. HƯỚNG DẪN SỬ DỤNG & BẢO QUẢN -->
-                <div id="admin-sec-care" class="section-box space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <label class="block font-extrabold text-[#142316] text-xs">📘 6. Hướng dẫn sử dụng & Bảo quản</label>
-                            <p class="text-[10px] text-slate-500">Quản lý các ô hướng dẫn nhanh ngoài thẻ và danh sách hướng dẫn chi tiết</p>
-                        </div>
-                        <button type="button" onclick="addCareRow('', '', '')"
-                            class="px-3 py-1.5 rounded-xl bg-[#234B24] hover:bg-emerald-800 text-white font-bold text-[11px] transition shrink-0">
-                            + Thêm hướng dẫn
-                        </button>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-1.5">
-                        <span class="text-[10px] text-slate-400 font-semibold">Gợi ý nhanh:</span>
-                        <button type="button" onclick="addCareRow('Tránh đựng đồ quá nóng', 'Tránh đựng đồ quá nóng/có gas', 'Chừa khoảng trống 2cm dưới cổ bình khi đựng nước sôi trên 90°C để tránh áp suất đẩy nắp.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Lưu ý nhiệt độ</button>
-                        <button type="button" onclick="addCareRow('Vệ sinh định kỳ bằng nước ấm', 'Vệ sinh định kỳ bằng nước ấm', 'Sử dụng cọ mềm cùng nước ấm hoặc baking soda pha loãng; không dùng búi sắt chà xát lòng bình.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Vệ sinh định kỳ</button>
-                        <button type="button" onclick="addCareRow('Bảo quản nơi khô ráo', 'Bảo quản nơi khô ráo', 'Để ráo tự nhiên và mở nắp khi không sử dụng trong thời gian dài.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Bảo quản khô ráo</button>
-                        <button type="button" onclick="addCareRow('Sử dụng bền lâu cùng Mindset', 'Thay thế linh kiện dễ dàng', 'Mindset cung cấp gioăng silicon và nắp lẻ thay thế suốt vòng đời sản phẩm.')" class="px-2 py-0.5 rounded-lg bg-white hover:bg-emerald-50 border border-slate-200 text-[10px] font-semibold text-slate-600">+ Thay thế linh kiện</button>
-                    </div>
-
-                    <div id="care-container" class="space-y-2 pt-1"></div>
-                </div>
-
-                <button type="submit" id="btn-submit"
-                    class="w-full py-3.5 bg-[#234B24] hover:bg-emerald-800 text-white font-extrabold rounded-xl shadow-md transition text-sm">
-                    Lưu sản phẩm vào Database
-                </button>
-            </form>
-        </section>
-
-        <!-- Right Column: Danh sách Sản phẩm hiện có (6 Cols) -->
-        <section class="lg:col-span-6 bg-white p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200/80 h-fit">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-base font-extrabold text-[#142316]">📦 Danh sách Hộ chiếu số đang hoạt động</h2>
-                <span id="prod-count" class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">0 sản phẩm</span>
-            </div>
-
-            <div id="product-list" class="space-y-3">
-                <!-- Đổ dữ liệu tự động từ API -->
-            </div>
-        </section>
-    </main>
-
-    <script>
-        const token = localStorage.getItem('mindset_admin_token');
-        if (!token) {
-            window.location.href = '/admin/login';
-        }
-
-        let allProducts = [];
-        let currentImageData = null;
-
-        function escapeHtml(str) {
-            return String(str || '')
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;');
-        }
-
-        // --- 1. SPECS ROWS ---
-        function addSpecRow(label = '', value = '', valuePlaceholder = 'Nhập số liệu (VD: 500ml, 320g...)') {
-            const container = document.getElementById('specs-container');
-            const row = document.createElement('div');
-            row.className = 'spec-row flex items-center gap-2';
-            row.innerHTML = `
-                <input type="text" value="${escapeHtml(label)}" placeholder="Tên danh mục (VD: Dung tích...)"
-                    class="spec-label-input w-5/12 px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                <input type="text" value="${escapeHtml(value)}" placeholder="${escapeHtml(valuePlaceholder)}"
-                    class="spec-value-input flex-1 px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                <button type="button" onclick="this.closest('.spec-row').remove()" title="Xóa dòng này"
-                    class="w-8 h-8 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0 transition">✕</button>
-            `;
-            container.appendChild(row);
-        }
-
-        function quickAddSpec(labelName, sampleValue) {
-            const container = document.getElementById('specs-container');
-            const emptyRow = Array.from(container.querySelectorAll('.spec-row')).find(r => {
-                const l = r.querySelector('.spec-label-input').value.trim();
-                const v = r.querySelector('.spec-value-input').value.trim();
-                return !l && !v;
-            });
-            if (emptyRow) {
-                emptyRow.querySelector('.spec-label-input').value = labelName;
-                const valInput = emptyRow.querySelector('.spec-value-input');
-                valInput.value = sampleValue;
-                valInput.focus();
-            } else {
-                addSpecRow(labelName, sampleValue);
-            }
-        }
-
-        function collectSpecsFromForm() {
-            const specs = [];
-            document.querySelectorAll('#specs-container .spec-row').forEach(row => {
-                const label = row.querySelector('.spec-label-input')?.value.trim() || '';
-                const value = row.querySelector('.spec-value-input')?.value.trim() || '';
-                if (label || value) specs.push({ label: label || 'Thông số', value });
-            });
-            return specs;
-        }
-
-        // --- 2. MATERIALS ROWS ---
-        function addMaterialRow(name = '', ratio = '', desc = '') {
-            const container = document.getElementById('materials-container');
-            const row = document.createElement('div');
-            row.className = 'material-row p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5';
-            row.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <input type="text" value="${escapeHtml(name)}" placeholder="Tên vật liệu / Bộ phận (VD: Thép không gỉ SUS304)"
-                        class="mat-name-input flex-1 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <input type="text" value="${escapeHtml(ratio)}" placeholder="Tỷ lệ (VD: 82% Khối lượng)"
-                        class="mat-ratio-input w-36 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-emerald-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <button type="button" onclick="this.closest('.material-row').remove()" title="Xóa vật liệu"
-                        class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0">✕</button>
-                </div>
-                <input type="text" value="${escapeHtml(desc)}" placeholder="Mô tả chi tiết tính chất, độ an toàn, nguồn gốc vật liệu..."
-                    class="mat-desc-input w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 focus:ring-2 focus:ring-emerald-700 outline-none">
-            `;
-            container.appendChild(row);
-        }
-
-        function collectMaterialsFromForm() {
-            const list = [];
-            document.querySelectorAll('#materials-container .material-row').forEach(row => {
-                const name = row.querySelector('.mat-name-input')?.value.trim() || '';
-                const ratio = row.querySelector('.mat-ratio-input')?.value.trim() || '';
-                const desc = row.querySelector('.mat-desc-input')?.value.trim() || '';
-                if (name || desc) list.push({ name, ratio, desc });
-            });
-            return list;
-        }
-
-        // --- 3. CERTIFICATIONS ROWS ---
-        function addCertRow(badge = '', title = '', desc = '') {
-            const container = document.getElementById('certs-container');
-            const row = document.createElement('div');
-            row.className = 'cert-row p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5';
-            row.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <input type="text" value="${escapeHtml(badge)}" placeholder="Mã ngắn (VD: ISO, RoHS, SGS)"
-                        class="cert-badge-input w-28 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-extrabold text-emerald-900 uppercase focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <input type="text" value="${escapeHtml(title)}" placeholder="Tên chứng nhận (VD: ISO 9001:2015 & ISO 14001)"
-                        class="cert-title-input flex-1 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <button type="button" onclick="this.closest('.cert-row').remove()" title="Xóa chứng nhận"
-                        class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0">✕</button>
-                </div>
-                <input type="text" value="${escapeHtml(desc)}" placeholder="Mô tả chi tiết chứng nhận chất lượng & an toàn..."
-                    class="cert-desc-input w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 focus:ring-2 focus:ring-emerald-700 outline-none">
-            `;
-            container.appendChild(row);
-        }
-
-        function collectCertsFromForm() {
-            const list = [];
-            document.querySelectorAll('#certs-container .cert-row').forEach(row => {
-                const badge = row.querySelector('.cert-badge-input')?.value.trim() || '';
-                const title = row.querySelector('.cert-title-input')?.value.trim() || '';
-                const desc = row.querySelector('.cert-desc-input')?.value.trim() || '';
-                if (badge || title || desc) list.push({ badge: badge || 'CERT', title, desc });
-            });
-            return list;
-        }
-
-        // --- 4. ENVIRONMENTAL IMPACT BREAKDOWN ROWS ---
-        function addImpactRow(label = '', value = '', percent = '') {
-            const container = document.getElementById('impact-container');
-            const row = document.createElement('div');
-            row.className = 'impact-row flex items-center gap-2';
-            row.innerHTML = `
-                <input type="text" value="${escapeHtml(label)}" placeholder="Hạng mục (VD: Nguyên liệu 85% Inox tái chế)"
-                    class="imp-label-input flex-1 px-2.5 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                <input type="text" value="${escapeHtml(value)}" placeholder="Mức CO₂ (VD: 0.62 kg)"
-                    class="imp-val-input w-28 px-2.5 py-1.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-emerald-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                <input type="number" min="0" max="100" value="${escapeHtml(percent)}" placeholder="% (VD: 50)"
-                    class="imp-pct-input w-20 px-2.5 py-1.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                <button type="button" onclick="this.closest('.impact-row').remove()" title="Xóa hạng mục"
-                    class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0">✕</button>
-            `;
-            container.appendChild(row);
-        }
-
-        function collectEnvImpactFromForm() {
-            const breakdown = [];
-            document.querySelectorAll('#impact-container .impact-row').forEach(row => {
-                const label = row.querySelector('.imp-label-input')?.value.trim() || '';
-                const value = row.querySelector('.imp-val-input')?.value.trim() || '';
-                const percent = Number(row.querySelector('.imp-pct-input')?.value || 0);
-                if (label || value) breakdown.push({ label, value, percent });
-            });
-            return {
-                summary: document.getElementById('prod-env-summary').value.trim(),
-                comparison: document.getElementById('prod-env-comparison').value.trim(),
-                breakdown
-            };
-        }
-
-        // --- 5. LIFECYCLE ROWS ---
-        function addLifecycleRow(short_label = '', title = '', desc = '') {
-            const container = document.getElementById('lifecycle-container');
-            const row = document.createElement('div');
-            row.className = 'lifecycle-row p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5';
-            row.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <input type="text" value="${escapeHtml(short_label)}" placeholder="Nhãn ngắn dưới icon (VD: Nguyên liệu bền vững)"
-                        class="lc-short-input w-44 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-emerald-900 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <input type="text" value="${escapeHtml(title)}" placeholder="Tiêu đề giai đoạn (VD: GIAI ĐOẠN 1 • NGUYÊN LIỆU BỀN VỮNG)"
-                        class="lc-title-input flex-1 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <button type="button" onclick="this.closest('.lifecycle-row').remove()" title="Xóa giai đoạn"
-                        class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0">✕</button>
-                </div>
-                <input type="text" value="${escapeHtml(desc)}" placeholder="Mô tả chi tiết hoạt động ở giai đoạn này..."
-                    class="lc-desc-input w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 focus:ring-2 focus:ring-emerald-700 outline-none">
-            `;
-            container.appendChild(row);
-        }
-
-        function collectLifecycleFromForm() {
-            const list = [];
-            document.querySelectorAll('#lifecycle-container .lifecycle-row').forEach(row => {
-                const short_label = row.querySelector('.lc-short-input')?.value.trim() || '';
-                const title = row.querySelector('.lc-title-input')?.value.trim() || '';
-                const desc = row.querySelector('.lc-desc-input')?.value.trim() || '';
-                if (short_label || title || desc) list.push({ short_label: short_label || title, title: title || short_label, desc });
-            });
-            return list;
-        }
-
-        // --- 6. CARE INSTRUCTIONS ROWS ---
-        function addCareRow(short_label = '', title = '', desc = '') {
-            const container = document.getElementById('care-container');
-            const row = document.createElement('div');
-            row.className = 'care-row p-2.5 bg-white rounded-xl border border-slate-200 space-y-1.5';
-            row.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <input type="text" value="${escapeHtml(short_label)}" placeholder="Nhãn ngắn ngoài thẻ (VD: Bảo quản nơi khô ráo)"
-                        class="care-short-input w-44 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-semibold text-emerald-900 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <input type="text" value="${escapeHtml(title)}" placeholder="Tiêu đề hướng dẫn (VD: Bảo quản nơi khô ráo)"
-                        class="care-title-input flex-1 px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:ring-2 focus:ring-emerald-700 outline-none">
-                    <button type="button" onclick="this.closest('.care-row').remove()" title="Xóa hướng dẫn"
-                        class="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center shrink-0">✕</button>
-                </div>
-                <input type="text" value="${escapeHtml(desc)}" placeholder="Nội dung hướng dẫn sử dụng & bảo quản chi tiết..."
-                    class="care-desc-input w-full px-2.5 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs text-slate-700 focus:ring-2 focus:ring-emerald-700 outline-none">
-            `;
-            container.appendChild(row);
-        }
-
-        function collectCareFromForm() {
-            const list = [];
-            document.querySelectorAll('#care-container .care-row').forEach(row => {
-                const short_label = row.querySelector('.care-short-input')?.value.trim() || '';
-                const title = row.querySelector('.care-title-input')?.value.trim() || '';
-                const desc = row.querySelector('.care-desc-input')?.value.trim() || '';
-                if (short_label || title || desc) list.push({ short_label: short_label || title, title: title || short_label, desc });
-            });
-            return list;
-        }
-
-        function fillSampleTemplate() {
-            document.getElementById('specs-container').innerHTML = '';
-            addSpecRow('Dung tích', '500ml');
-            addSpecRow('Giữ nhiệt', '12h nóng / 24h lạnh');
-            addSpecRow('Trọng lượng', '320g');
-
-            document.getElementById('prod-material-badge').value = 'Inox 304';
-            document.getElementById('prod-material').value = 'Sản phẩm được làm từ thép không gỉ 304 cao cấp, an toàn cho sức khỏe và thân thiện với môi trường.';
-            document.getElementById('materials-container').innerHTML = '';
-            addMaterialRow('Thép không gỉ Austenitic SUS304', '82% Khối lượng', 'Chứa 18% Crom và 8% Niken, chống oxy hóa tuyệt đối, không chứa BPA và không thôi nhiễm kim loại nặng.');
-            addMaterialRow('Nắp nhựa PP nguyên sinh & Gioăng Silicon y tế', '14% Khối lượng', 'Chịu nhiệt lên tới 120°C, tháo rời dễ dàng để vệ sinh và tái chế riêng biệt.');
-            addMaterialRow('Sơn tĩnh điện Powder Coating không dung môi', '4% Khối lượng', 'Bề mặt nhám Matte Black chống bám vân tay, không phát thải VOC trong quá trình phủ.');
-
-            document.getElementById('prod-cert-summary').value = 'Đạt các tiêu chuẩn chất lượng và an toàn quốc tế.';
-            document.getElementById('certs-container').innerHTML = '';
-            addCertRow('ISO', 'ISO 9001:2015 & ISO 14001', 'Hệ thống quản lý chất lượng và môi trường chuẩn quốc tế.');
-            addCertRow('RoHS', 'Chứng chỉ RoHS Châu Âu', 'Cam kết 100% không chì (Lead-free), thủy ngân hay Cadmium.');
-            addCertRow('SGS', 'Kiểm định tiếp xúc thực phẩm SGS', 'Đạt chuẩn QCVN 12-3:2011/BYT về an toàn vệ sinh thực phẩm.');
-
-            document.getElementById('prod-co2').value = document.getElementById('prod-co2').value || '1.24 kg';
-            document.getElementById('prod-env-summary').value = 'Giảm phát thải CO₂ ≈ 32% so với sản phẩm truyền thống.';
-            document.getElementById('prod-env-comparison').value = 'Giảm 32% so với bình giữ nhiệt thông thường (1.82 kg)';
-            document.getElementById('impact-container').innerHTML = '';
-            addImpactRow('Nguyên liệu (85% Inox tái chế)', '0.62 kg', 50);
-            addImpactRow('Sản xuất bằng điện mặt trời áp mái', '0.34 kg', 27);
-            addImpactRow('Bao bì giấy FSC & Vận chuyển xanh', '0.28 kg', 23);
-
-            document.getElementById('prod-lifecycle-summary').value = 'Từ nguyên liệu đến tái chế, Mindset luôn đồng hành cùng bạn trong hành trình xanh.';
-            document.getElementById('lifecycle-container').innerHTML = '';
-            addLifecycleRow('Nguyên liệu bền vững', 'GIAI ĐOẠN 1 • NGUYÊN LIỆU BỀN VỮNG', 'Sử dụng 85% thép không gỉ 304 tái chế có chứng nhận nguồn gốc, giảm khai thác quặng mới.');
-            addLifecycleRow('Sản xuất hiện đại', 'GIAI ĐOẠN 2 • SẢN XUẤT HIỆN ĐẠI', 'Dây chuyền hàn laser không chì, sử dụng năng lượng tái tạo và tuần hoàn 95% lượng nước làm mát.');
-            addLifecycleRow('Phân phối thông minh', 'GIAI ĐOẠN 3 • PHÂN PHỐI THÔNG MINH', 'Hộp giấy Kraft đạt chuẩn FSC 100% không màng nilon, mực in đậu nành thân thiện sinh thái.');
-            addLifecycleRow('Tái chế vì tương lai', 'GIAI ĐOẠN 4 • TÁI CHẾ VÌ TƯƠNG LAI', 'Chương trình "Thu cũ đổi xanh" tại mọi điểm bán Mindset — hoàn tiền 15% khi gửi lại bình cũ để tái chế.');
-
-            document.getElementById('care-container').innerHTML = '';
-            addCareRow('Tránh đựng đồ quá nóng', 'Tránh đựng đồ quá nóng/có gas', 'Chừa khoảng trống 2cm dưới cổ bình khi đựng nước sôi trên 90°C để tránh áp suất đẩy nắp.');
-            addCareRow('Vệ sinh định kỳ bằng nước ấm', 'Vệ sinh định kỳ bằng nước ấm', 'Sử dụng cọ mềm cùng nước ấm hoặc baking soda pha loãng; không dùng búi sắt chà xát lòng bình.');
-            addCareRow('Bảo quản nơi khô ráo', 'Bảo quản nơi khô ráo', 'Để ráo tự nhiên và mở nắp khi không sử dụng trong thời gian dài.');
-            addCareRow('Sử dụng bền lâu cùng Mindset', 'Thay thế linh kiện dễ dàng', 'Mindset cung cấp gioăng silicon và nắp lẻ thay thế suốt vòng đời sản phẩm.');
-        }
-
-        function initEmptyRows() {
-            document.getElementById('specs-container').innerHTML = '';
-            addSpecRow('', '');
-            addSpecRow('', '');
-            document.getElementById('materials-container').innerHTML = '';
-            addMaterialRow('', '', '');
-            document.getElementById('certs-container').innerHTML = '';
-            addCertRow('', '', '');
-            document.getElementById('impact-container').innerHTML = '';
-            addImpactRow('', '', '');
-            document.getElementById('lifecycle-container').innerHTML = '';
-            addLifecycleRow('', '', '');
-            document.getElementById('care-container').innerHTML = '';
-            addCareRow('', '', '');
-        }
-
-        function getProductSpecsList(p) {
-            if (Array.isArray(p.specs) && p.specs.length > 0) return p.specs;
-            const fallback = [];
-            if (p.capacity) fallback.push({ label: 'Dung tích', value: p.capacity });
-            if (p.temperature) fallback.push({ label: 'Giữ nhiệt', value: p.temperature });
-            if (p.weight) fallback.push({ label: 'Trọng lượng', value: p.weight });
-            return fallback;
-        }
-
-        async function loadProducts() {
-            const res = await fetch('/api/admin/products', {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (res.status === 401 || res.status === 403) {
-                localStorage.removeItem('mindset_admin_token');
-                window.location.href = '/admin/login';
-                return;
-            }
-            allProducts = await res.json();
-            document.getElementById('prod-count').textContent = `${allProducts.length} sản phẩm`;
-
-            const listEl = document.getElementById('product-list');
-            if (allProducts.length === 0) {
-                listEl.innerHTML = `<p class="text-xs text-slate-400 text-center py-8">Chưa có sản phẩm nào trong Database.</p>`;
-                return;
-            }
-
-            listEl.innerHTML = allProducts.map(p => {
-                const specs = getProductSpecsList(p);
-                const specsBadges = specs.map(s => `
-                    <span class="px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-[11px] text-slate-700">
-                        <strong class="text-slate-900">${escapeHtml(s.label)}:</strong> ${escapeHtml(s.value)}
-                    </span>
-                `).join('');
-
-                const matCount = (p.materials || []).length;
-                const certCount = (p.certifications || []).length;
-                const lifeCount = (p.lifecycle || []).length;
-                const careCount = (p.care_instructions || []).length;
-
-                return `
-                <div class="p-4 rounded-2xl bg-[#F8FAF5] border border-slate-200 flex flex-col justify-between gap-3">
-                    <div class="flex items-start justify-between gap-3">
-                        <div class="flex items-start gap-3 min-w-0">
-                            ${p.image_data ? `<img src="${p.image_data}" alt="" class="w-14 h-14 object-contain rounded-lg bg-white border border-slate-200 p-1 shrink-0">` : ''}
-                            <div class="space-y-1 min-w-0">
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    <span class="px-2 py-0.5 rounded bg-emerald-800 text-white font-mono text-[11px] font-bold">${escapeHtml(p.id)}</span>
-                                    ${p.category ? `<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">${escapeHtml(p.category)}</span>` : ''}
-                                    <h3 class="font-extrabold text-sm text-slate-900">${escapeHtml(p.name)}</h3>
-                                </div>
-                                <p class="text-xs text-slate-600">${escapeHtml(p.tagline || '')}</p>
+                <details class="group rounded-2xl bg-[#F8FAF5] border border-emerald-900/15 p-3.5">
+                    <summary class="font-extrabold text-[#142316] text-xs cursor-pointer flex items-center justify-between">
+                        <span>🧪 2. Hồ sơ vật liệu (Đồng bộ thẻ & Modal Vật liệu)</span>
+                        <span class="text-emerald-700 text-[11px] group-open:rotate-180 transition">▼</span>
+                    </summary>
+                    <div class="mt-3 space-y-2.5 pt-2.5 border-t border-slate-200/80">
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                            <div class="sm:col-span-8">
+                                <label class="block font-bold text-slate-700 mb-1">Mô tả ngắn ngoài thẻ Vật liệu</label>
+                                <input type="text" id="prod-material-desc" placeholder="Sản phẩm được làm từ thép không gỉ 304 cao cấp..."
+                                    class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl">
+                            </div>
+                            <div class="sm:col-span-4">
+                                <label class="block font-bold text-slate-700 mb-1">Nhãn góc phải</label>
+                                <input type="text" id="prod-material-badge" placeholder="VD: Inox 304"
+                                    class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl">
                             </div>
                         </div>
-
-                        <div class="flex items-center space-x-1.5 shrink-0">
-                            <button onclick="openQrModal('${escapeHtml(p.id)}')"
-                                class="px-2.5 py-1.5 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 text-xs font-bold transition">
-                                Mã QR & Tải về
-                            </button>
-                            <button onclick="editProduct('${escapeHtml(p.id)}')"
-                                class="px-2.5 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold transition">
-                                Sửa
-                            </button>
-                            <button onclick="deleteProduct('${escapeHtml(p.id)}')"
-                                class="px-2.5 py-1.5 rounded-xl bg-red-100 hover:bg-red-200 text-red-700 text-xs font-bold transition">
-                                Xóa
-                            </button>
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="font-bold text-slate-700 text-[11px]">Chi tiết các lớp vật liệu:</span>
+                            <button type="button" onclick="addMaterialRow()" class="px-2.5 py-1 rounded-lg bg-emerald-800 text-white font-bold text-[11px] whitespace-nowrap">+ Thêm vật liệu</button>
                         </div>
+                        <div id="materials-container" class="space-y-2"></div>
                     </div>
+                </details>
 
-                    <div class="flex flex-wrap items-center gap-1.5 pt-1 text-[11px] text-slate-500">
-                        ${specsBadges}
-                        ${p.co2_emission ? `<span class="px-2 py-0.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px]">🌿 CO₂: <strong>${escapeHtml(p.co2_emission)}</strong></span>` : ''}
+                <!-- 3. CHỨNG NHẬN -->
+                <details class="group rounded-2xl bg-[#F8FAF5] border border-emerald-900/15 p-3.5">
+                    <summary class="font-extrabold text-[#142316] text-xs cursor-pointer flex items-center justify-between">
+                        <span>🏅 3. Chứng nhận chất lượng & An toàn</span>
+                        <span class="text-emerald-700 text-[11px] group-open:rotate-180 transition">▼</span>
+                    </summary>
+                    <div class="mt-3 space-y-2.5 pt-2.5 border-t border-slate-200/80">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Mô tả ngắn ngoài thẻ Chứng nhận</label>
+                            <input type="text" id="prod-cert-desc" placeholder="Đạt các tiêu chuẩn chất lượng và an toàn quốc tế."
+                                class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl">
+                        </div>
+                        <div class="flex items-center justify-between pt-1">
+                            <span class="font-bold text-slate-700 text-[11px]">Danh sách chứng chỉ:</span>
+                            <button type="button" onclick="addCertRow()" class="px-2.5 py-1 rounded-lg bg-emerald-800 text-white font-bold text-[11px] whitespace-nowrap">+ Thêm chứng chỉ</button>
+                        </div>
+                        <div id="certs-container" class="space-y-2"></div>
                     </div>
+                </details>
 
-                    <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-200/70 text-[10px] font-semibold text-slate-600">
-                        <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200">🧪 Vật liệu: ${matCount} mục</span>
-                        <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200">🏅 Chứng nhận: ${certCount} mục</span>
-                        <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200">🔄 Vòng đời: ${lifeCount} chặng</span>
-                        <span class="px-2 py-0.5 rounded-md bg-white border border-slate-200">📘 Hướng dẫn: ${careCount} mục</span>
-                    </div>
-                </div>
-                `;
-            }).join('');
-        }
-
-        function editProduct(id) {
-            const p = allProducts.find(item => item.id === id);
-            if (!p) return;
-
-            document.getElementById('edit-mode').value = 'true';
-            document.getElementById('form-title').textContent = `✏️ Chỉnh sửa toàn diện: ${p.id}`;
-            document.getElementById('btn-submit').textContent = 'Cập nhật tất cả thay đổi';
-            document.getElementById('btn-cancel-edit').classList.remove('hidden');
-
-            const idInput = document.getElementById('prod-id');
-            idInput.value = p.id;
-            idInput.disabled = true;
-            idInput.classList.add('bg-slate-100');
-
-            document.getElementById('prod-name').value = p.name || '';
-            document.getElementById('prod-category').value = p.category || '';
-            document.getElementById('prod-tagline').value = p.tagline || '';
-            document.getElementById('prod-batch').value = p.batch_code || '';
-            document.getElementById('prod-date').value = p.release_date || '';
-
-            // 1. Specs
-            const specs = getProductSpecsList(p);
-            const specsContainer = document.getElementById('specs-container');
-            specsContainer.innerHTML = '';
-            if (specs.length > 0) specs.forEach(s => addSpecRow(s.label, s.value));
-            else addSpecRow('', '');
-
-            // 2. Materials
-            document.getElementById('prod-material-badge').value = p.material_badge || '';
-            document.getElementById('prod-material').value = p.material_desc || '';
-            const matContainer = document.getElementById('materials-container');
-            matContainer.innerHTML = '';
-            if (Array.isArray(p.materials) && p.materials.length > 0) {
-                p.materials.forEach(m => addMaterialRow(m.name, m.ratio, m.desc));
-            } else {
-                addMaterialRow('', '', '');
-            }
-
-            // 3. Certifications
-            document.getElementById('prod-cert-summary').value = p.cert_summary || '';
-            const certContainer = document.getElementById('certs-container');
-            certContainer.innerHTML = '';
-            if (Array.isArray(p.certifications) && p.certifications.length > 0) {
-                p.certifications.forEach(c => addCertRow(c.badge, c.title, c.desc));
-            } else {
-                addCertRow('', '', '');
-            }
-
-            // 4. Environmental Impact
-            document.getElementById('prod-co2').value = p.co2_emission || '';
-            const env = p.env_impact || {};
-            document.getElementById('prod-env-summary').value = env.summary || '';
-            document.getElementById('prod-env-comparison').value = env.comparison || '';
-            const impContainer = document.getElementById('impact-container');
-            impContainer.innerHTML = '';
-            if (Array.isArray(env.breakdown) && env.breakdown.length > 0) {
-                env.breakdown.forEach(b => addImpactRow(b.label, b.value, b.percent));
-            } else {
-                addImpactRow('', '', '');
-            }
-
-            // 5. Lifecycle
-            document.getElementById('prod-lifecycle-summary').value = p.lifecycle_summary || '';
-            const lcContainer = document.getElementById('lifecycle-container');
-            lcContainer.innerHTML = '';
-            if (Array.isArray(p.lifecycle) && p.lifecycle.length > 0) {
-                p.lifecycle.forEach(l => addLifecycleRow(l.short_label, l.title, l.desc));
-            } else {
-                addLifecycleRow('', '', '');
-            }
-
-            // 6. Care Instructions
-            const careContainer = document.getElementById('care-container');
-            careContainer.innerHTML = '';
-            if (Array.isArray(p.care_instructions) && p.care_instructions.length > 0) {
-                p.care_instructions.forEach(c => addCareRow(c.short_label, c.title, c.desc));
-            } else {
-                addCareRow('', '', '');
-            }
-
-            currentImageData = p.image_data || null;
-            updateImagePreview(currentImageData);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function resetForm() {
-            document.getElementById('product-form').reset();
-            currentImageData = null;
-            updateImagePreview(null);
-            initEmptyRows();
-            document.getElementById('edit-mode').value = 'false';
-            document.getElementById('form-title').textContent = '➕ Thêm Sản phẩm DPP mới';
-            document.getElementById('btn-submit').textContent = 'Lưu sản phẩm vào Database';
-            document.getElementById('btn-cancel-edit').classList.add('hidden');
-
-            const idInput = document.getElementById('prod-id');
-            idInput.disabled = false;
-            idInput.classList.remove('bg-slate-100');
-        }
-
-        function updateImagePreview(src) {
-            const preview = document.getElementById('prod-image-preview');
-            const removeBtn = document.getElementById('btn-remove-image');
-            if (src) {
-                preview.src = src;
-                preview.classList.remove('hidden');
-                removeBtn.classList.remove('hidden');
-            } else {
-                preview.removeAttribute('src');
-                preview.classList.add('hidden');
-                removeBtn.classList.add('hidden');
-            }
-        }
-
-        function removeProductImage() {
-            currentImageData = null;
-            document.getElementById('prod-image-file').value = '';
-            updateImagePreview(null);
-        }
-
-        document.getElementById('prod-image-file').addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
-            if (file.size > 4 * 1024 * 1024) {
-                alert('Ảnh vượt quá 4 MB. Vui lòng chọn ảnh nhỏ hơn.');
-                event.target.value = '';
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = () => {
-                currentImageData = reader.result;
-                updateImagePreview(currentImageData);
-            };
-            reader.onerror = () => alert('Không thể đọc tệp ảnh này.');
-            reader.readAsDataURL(file);
-        });
-
-        document.getElementById('product-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const isEdit = document.getElementById('edit-mode').value === 'true';
-            const id = document.getElementById('prod-id').value.trim();
-            const specs = collectSpecsFromForm();
-            const materials = collectMaterialsFromForm();
-            const certifications = collectCertsFromForm();
-            const env_impact = collectEnvImpactFromForm();
-            const lifecycle = collectLifecycleFromForm();
-            const care_instructions = collectCareFromForm();
-
-            const payload = {
-                id,
-                name: document.getElementById('prod-name').value.trim(),
-                category: document.getElementById('prod-category').value.trim(),
-                tagline: document.getElementById('prod-tagline').value.trim(),
-                specs,
-                capacity: specs[0]?.value || '',
-                temperature: specs[1]?.value || '',
-                weight: specs[2]?.value || '',
-                material_badge: document.getElementById('prod-material-badge').value.trim(),
-                material_desc: document.getElementById('prod-material').value.trim(),
-                materials,
-                cert_summary: document.getElementById('prod-cert-summary').value.trim(),
-                certifications,
-                co2_emission: document.getElementById('prod-co2').value.trim(),
-                env_impact,
-                lifecycle_summary: document.getElementById('prod-lifecycle-summary').value.trim(),
-                lifecycle,
-                care_instructions,
-                batch_code: document.getElementById('prod-batch').value.trim(),
-                release_date: document.getElementById('prod-date').value.trim(),
-                image_data: currentImageData
-            };
-
-            const url = isEdit ? `/api/admin/products/${encodeURIComponent(id)}` : '/api/admin/products';
-            const method = isEdit ? 'PUT' : 'POST';
-
-            const res = await fetch(url, {
-                method,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const data = await res.json();
-            if (res.ok) {
-                resetForm();
-                loadProducts();
-                alert(data.message);
-            } else {
-                alert(data.error || 'Có lỗi xảy ra!');
-            }
-        });
-
-        async function deleteProduct(id) {
-            if (!confirm(`Bạn có chắc chắn muốn xóa Hộ chiếu số của mã "${id}" không?`)) return;
-            const res = await fetch(`/api/admin/products/${encodeURIComponent(id)}`, {
-                method: 'DELETE',
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await res.json();
-            if (res.ok) {
-                loadProducts();
-            } else {
-                alert(data.error || 'Không thể xóa!');
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('mindset_admin_token');
-            window.location.href = '/admin/login';
-        }
-
-        initEmptyRows();
-        loadProducts();
-    </script>
-
-    <!-- QR Code Modal -->
-    <div id="qr-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-        <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl text-center space-y-4 border border-slate-200">
-            <div class="flex justify-between items-center">
-                <h3 class="font-extrabold text-base text-slate-900" id="qr-modal-title">Mã QR Hộ chiếu số</h3>
-                <button onclick="closeQrModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 font-bold">✕</button>
-            </div>
-            <div id="qrcode-container" class="bg-white p-4 rounded-2xl border-2 border-emerald-800 shadow-inner inline-flex justify-center items-center mx-auto">
-                <div id="qrcode"></div>
-            </div>
-            <div>
-                <a id="qr-modal-visit-btn" href="#" target="_blank" rel="noopener noreferrer"
-                    class="w-full py-2.5 px-4 bg-emerald-100 hover:bg-emerald-200 text-emerald-900 text-xs font-extrabold rounded-xl transition inline-flex items-center justify-center space-x-1.5 shadow-2xs">
-                    <span>Vào xem ↗</span>
-                </a>
-            </div>
-            <div class="flex space-x-2 pt-1">
-                <button onclick="downloadQrImage()" class="flex-1 py-2.5 bg-[#234B24] hover:bg-emerald-800 text-white text-xs font-bold rounded-xl shadow transition">
-                    Tải ảnh QR về máy ⬇
-                </button>
-                <button onclick="closeQrModal()" class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold rounded-xl transition">
-                    Đóng
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let _activeQrUrl = '';
-        let _activeQrProductId = '';
-        function openQrModal(productId) {
-            const fullUrl = window.location.origin + '/dpp/' + encodeURIComponent(productId);
-            _activeQrUrl = fullUrl;
-            _activeQrProductId = productId;
-            document.getElementById('qr-modal-title').textContent = `Mã QR: ${productId}`;
-            const visitBtn = document.getElementById('qr-modal-visit-btn');
-            if (visitBtn) {
-                visitBtn.href = fullUrl;
-            }
-
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = '';
-
-            new QRCode(qrContainer, {
-                text: fullUrl,
-                width: 200,
-                height: 200,
-                colorDark: "#142316",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            document.getElementById('qr-modal').classList.remove('hidden');
-            document.getElementById('qr-modal').classList.add('flex');
-        }
-
-        function closeQrModal() {
-            const modal = document.getElementById('qr-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        function downloadQrImage() {
-            const img = document.querySelector('#qrcode img') || document.querySelector('#qrcode canvas');
-            if (!img) return;
-
-            let imageUrl = '';
-            if (img.tagName === 'CANVAS') {
-                imageUrl = img.toDataURL('image/png');
-            } else if (img.tagName === 'IMG') {
-                imageUrl = img.src;
-            }
-
-            if (!imageUrl) return;
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = `QR-DPP-${_activeQrProductId || 'Mindset'}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    </script>
-</body>
-</html>
+                <!-- 4. TÁC ĐỘNG MÔI TRƯỜNG -->
+                <details class="group rounded-2xl bg-[#F8FAF5] border border-emerald-900/15 p-3.5">
+                    <summary class
